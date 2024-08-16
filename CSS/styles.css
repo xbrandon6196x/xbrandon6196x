@@ -1,70 +1,92 @@
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
     margin: 0;
-    padding: 0;
-    background: #f4f4f4;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
 }
 
 .container {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
-    width: 90%;
-    margin: 0 auto;
-    padding: 50px 0;
+    justify-content: center;
+    height: 100vh;
+    max-width: 1200px;
+    margin: auto;
 }
 
-h1, h2, h3 {
-    color: #333;
-}
-
-#introduction {
-    background: #fff;
-    padding: 50px;
+.left-column {
+    flex: 1;
+    min-width: 300px;
+    padding: 20px;
+    background-color: white;
     text-align: left;
+}
+
+.right-column {
+    flex: 1;
+    min-width: 300px;
+    background-color: #00c601;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 20px;
 }
 
-.intro-text {
-    max-width: 50%;
-}
-
-.intro-text h1 {
-    font-size: 3em;
-    margin: 0;
+h1 {
+    font-size: 2em;
     color: #333;
+    margin-bottom: 10px;
 }
 
-.intro-text p {
-    font-size: 1.2em;
-    color: #666;
+h1 span {
+    color: #00c601;
+}
+
+p {
+    font-size: 1em;
+    color: #333;
     margin-top: 20px;
 }
 
-.intro-text h1 .highlight {
-    color: #00c601; /* Color amarillo */
-}
-
-.btn {
-    display: inline-block;
+button {
+    margin-top: 20px;
     padding: 10px 20px;
-    margin-top: 20px;
-    background: #00c601;
-    color: #fff;
-    text-decoration: none;
+    background-color: #00c601;
+    color: white;
+    border: none;
     border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
 }
 
-.intro-image {
-    max-width: 50%;
-    text-align: right;
-    background-color: ;
-}
-
-.intro-image img {
+.right-column img {
     max-width: 100%;
+    height: auto;
     border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+    }
+
+    .right-column {
+        justify-content: flex-start;
+        padding-top: 20px;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    .left-column p {
+        text-align: center;
+    }
+
+    button {
+        display: block;
+        margin: 20px auto 0;
+    }
 }
