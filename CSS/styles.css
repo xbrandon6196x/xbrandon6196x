@@ -6,7 +6,7 @@ body {
 }
 
 .sidebar {
-    width: 120px;
+    width: 150px;
     background-color: #00c601;
     display: flex;
     flex-direction: column;
@@ -27,19 +27,32 @@ body {
 
 .sidebar ul li a {
     text-decoration: none;
-    color: white;
+    color: #333;
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 0.9em;
+    font-size: 0.7em;
 }
 
-.sidebar ul li a img {
-    width: 40px;  /* Tamaño de los iconos de la barra lateral */
+.sidebar-logos img
+{
+    width: 40px;  
     height: 40px;
     margin-bottom: 5px;
 }
 
+
+.bk-icon img
+{
+    width: 60px;  
+    height: 60px;
+    margin-bottom: 5px;
+}
+{
+    width: 60px;  
+    height: 60px;
+    margin-bottom: 5px;
+}
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -52,11 +65,14 @@ body {
 }
 
 .left-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     flex: 1;
     min-width: 300px;
     padding: 20px;
     background-color: #f4f4f4;
-    text-align: left;
+    text-align: center;
 }
 
 .right-column {
@@ -119,45 +135,6 @@ button {
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-        height: auto;
-        padding: 20px;
-    }
-
-    .right-column {
-        justify-content: flex-start;
-        padding-top: 20px;
-    }
-
-    h1 {
-        text-align: center;
-    }
-
-    .left-column p {
-        text-align: center;
-    }
-
-    button {
-        display: block;
-        margin: 20px auto 0;
-    }
-
-    .sidebar {
-        flex-direction: row;
-        height: auto;
-        width: 100%;
-        justify-content: space-around;
-    }
-
-    .sidebar ul {
-        display: flex;
-        justify-content: space-around;
-        width: 100%;
-    }
-
-    .sidebar ul li {
-        margin-bottom: 0;
-    }
+@media (max-width: 856px) {
+    
 }
