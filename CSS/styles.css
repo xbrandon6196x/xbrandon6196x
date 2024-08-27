@@ -1,7 +1,43 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #fff;
+    display: flex;
+}
+
+.sidebar {
+    width: 120px;
+    background-color: #00c601;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.sidebar ul li {
+    margin-bottom: 20px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.9em;
+}
+
+.sidebar ul li a img {
+    width: 40px;  /* Tamaño de los iconos de la barra lateral */
+    height: 40px;
+    margin-bottom: 5px;
 }
 
 .container {
@@ -12,13 +48,14 @@ body {
     height: 100vh;
     max-width: 1200px;
     margin: auto;
+    padding-left: 120px; /* Espacio para la barra lateral */
 }
 
 .left-column {
     flex: 1;
     min-width: 300px;
     padding: 20px;
-    background-color: white;
+    background-color: #f4f4f4;
     text-align: left;
 }
 
@@ -65,6 +102,23 @@ button {
     border-radius: 10px;
 }
 
+.social-icons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.social-icons a {
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.social-icons img {
+    width: 40px; /* Tamaño de los iconos de redes sociales */
+    height: 40px;
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
@@ -88,5 +142,22 @@ button {
     button {
         display: block;
         margin: 20px auto 0;
+    }
+
+    .sidebar {
+        flex-direction: row;
+        height: auto;
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .sidebar ul {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    .sidebar ul li {
+        margin-bottom: 0;
     }
 }
