@@ -12,6 +12,7 @@ body {
     flex-direction: column;
     align-items: center;
     padding-top: 20px;
+    
 }
 
 .sidebar ul {
@@ -61,7 +62,6 @@ body {
     height: 100vh;
     max-width: 1200px;
     margin: auto;
-    padding-left: 120px; /* Espacio para la barra lateral */
 }
 
 .left-column {
@@ -136,5 +136,7 @@ button {
 
 /* Responsive adjustments */
 @media (max-width: 856px) {
-    
+    .sidebar {
+        width: 30vw;
+    }
 }
