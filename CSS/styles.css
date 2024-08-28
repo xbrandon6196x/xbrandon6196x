@@ -12,7 +12,7 @@ body {
     flex-direction: column;
     align-items: center;
     padding-top: 140px;
-    
+    transition: transform 0.3s ease;
 }
 
 .sidebar ul {
@@ -25,7 +25,7 @@ body {
 .sidebar ul li {
     width: 50%;
     border-bottom: 1px inset #fff;
-    margin:10px 0px 0px 30px;
+    margin: 10px 0px 0px 30px;
     padding: 4px;
 }
 
@@ -38,25 +38,40 @@ body {
     font-size: 0.7em;
 }
 
-.sidebar-logos img
-{
-    width: 40px;  
+.sidebar-logos img {
+    width: 40px;
     height: 40px;
     margin-bottom: 5px;
 }
 
+.bk-icon img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 5px;
+}
 
-.bk-icon img
-{
-    width: 60px;  
-    height: 60px;
-    margin-bottom: 5px;
+/* Estilos del botón hamburguesa */
+.hamburger {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    display: none;
 }
-{
-    width: 60px;  
-    height: 60px;
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
     margin-bottom: 5px;
+    background-color: #fff;
+    transition: 0.4s;
 }
+
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -137,6 +152,7 @@ button {
     height: 40px;
 }
 
+
 /* Responsive adjustments */
 
 @media (max-width: 1024px) {
@@ -144,8 +160,29 @@ button {
         display: none;
     }
 }
+
 @media (max-height: 650px) {
     .sidebar {
         padding-top: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .right-column {
+        min-width: 300px; 
+    }
+
+    .left-column p {
+        text-align: center;
+    }
+
+    button {
+        display: block;
+        margin: 20px auto 0;
     }
 }
