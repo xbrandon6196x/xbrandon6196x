@@ -144,7 +144,7 @@ button {
         padding-top: 20px;
     }
 }*/
-@media (max-width: 776px) {
+@media (max-width: 877px) {
     .sidebar {
         display: none;
     }
