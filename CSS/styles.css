@@ -12,7 +12,11 @@ body {
     flex-direction: column;
     align-items: center;
     padding-top: 140px;
-    transition: transform 0.3s ease;
+    position: fixed; /* La barra lateral ahora es fija */
+    top: 0;
+    left: 0;
+    height: 100%;
+    transition: transform 0.3s ease-in-out;
 }
 
 .sidebar ul {
@@ -50,15 +54,15 @@ body {
     margin-bottom: 5px;
 }
 
-/* Estilos del botón hamburguesa */
+/* Estilos del botón de hamburguesa, inicialmente oculto en pantallas grandes */
 .hamburger {
     background: none;
     border: none;
     cursor: pointer;
     padding: 10px;
-    position: absolute;
+    position: fixed;
     top: 10px;
-    right: 10px;
+    left: 10px; /* Cambiar de 'right' a 'left' para posicionarlo a la izquierda */
     z-index: 1000;
     display: none;
 }
@@ -68,10 +72,11 @@ body {
     width: 25px;
     height: 3px;
     margin-bottom: 5px;
-    background-color: #fff;
+    background-color: #333;
     transition: 0.4s;
 }
 
+/* Estilos generales de la página */
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -80,22 +85,24 @@ body {
     height: 100vh;
     max-width: 1200px;
     margin: auto;
+    padding-left: 170px; /* Añade un espacio para la barra lateral */
 }
 
 .left-column {
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex: 1;
+    flex: 2;
     min-width: 300px;
     padding: 20px;
     background-color: #f4f4f4;
     text-align: center;
+    max-width: 100%; /* Asegura que la columna izquierda no se desborde */
 }
 
 .right-column {
     flex: 1;
-    min-width: 400px;
+    min-width: 300px;
     background-color: #00c601;
     display: flex;
     align-items: center;
@@ -152,29 +159,16 @@ button {
     height: 40px;
 }
 
-
-/* Responsive adjustments */
+/* Ajustes responsivos */
 
 @media (max-width: 1024px) {
-    .sidebar {
-        display: none;
-    }
-}
-
-@media (max-height: 650px) {
-    .sidebar {
-        padding-top: 0;
-    }
-}
-
-@media (max-width: 768px) {
     .container {
         flex-direction: column;
         height: auto;
     }
 
     .right-column {
-        min-width: 300px; 
+        min-width: 100%; /* La columna derecha ocupa el 100% del ancho disponible */
     }
 
     .left-column p {
@@ -184,5 +178,28 @@ button {
     button {
         display: block;
         margin: 20px auto 0;
+    }
+
+    .hamburger {
+        display: block; /* Mostrar el botón de hamburguesa en móviles */
+    }
+
+    .sidebar {
+        transform: translateX(-150px); /* Ocultar el sidebar inicialmente en móviles */
+    }
+
+    .sidebar.active {
+        transform: translateX(0); /* Mostrar el sidebar cuando el botón de hamburguesa se activa */
+    }
+
+    .container {
+        flex-direction: column; /* Cambia la dirección del flex en pantallas pequeñas */
+        padding-left: 0; /* Elimina el margen izquierdo para pantallas pequeñas */
+    }
+
+    .left-column,
+    .right-column {
+        max-width: 100%; /* Asegura que las columnas ocupen el 100% del ancho disponible */
+        flex: 1 1 100%;
     }
 }

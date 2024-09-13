@@ -7,7 +7,15 @@
     <link rel="stylesheet" href="/CSS/styles.css">
 </head>
 <body>
-    <div class="sidebar">
+    <!-- Botón de hamburguesa, solo visible en móviles -->
+    <button class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- Menú lateral (sidebar) -->
+    <div class="sidebar" id="sidebar">
         <ul>
             <li>
                 <a href="#" class="bk-icon">
@@ -46,6 +54,7 @@
             </li>
         </ul>
     </div>
+
     <div class="container">
         <div class="left-column">
             <h1>Hola, soy <span>Brand Keymolent!</span></h1>
@@ -63,5 +72,15 @@
             <img src="/ASSETS/brand_perfil_icon.png" alt="Brand Keymolent Foto Perfil">
         </div>
     </div>
+
+    <script>
+        // Toggle del menú de hamburguesa
+        const hamburger = document.getElementById('hamburger');
+        const sidebar = document.getElementById('sidebar');
+
+        hamburger.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
