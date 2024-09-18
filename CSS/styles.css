@@ -12,7 +12,7 @@ body {
     flex-direction: column;
     align-items: center;
     padding-top: 100px;
-    position: fixed; /* La barra lateral ahora es fija */
+    position: fixed; 
     top: 0;
     left: 0;
     height: 100%;
@@ -62,7 +62,7 @@ body {
     padding: 10px;
     position: fixed;
     top: 10px;
-    left: 10px; /* Cambiar de 'right' a 'left' para posicionarlo a la izquierda */
+    left: 10px;
     z-index: 1000;
     display: none;
 }
@@ -76,7 +76,6 @@ body {
     transition: 0.4s;
 }
 
-/* Estilos generales de la página */
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -85,7 +84,7 @@ body {
     height: 100vh;
     max-width: 1200px;
     margin: auto;
-    padding-left: 170px; /* Añade un espacio para la barra lateral */
+    padding-left: 170px; 
 }
 
 .left-column {
@@ -97,7 +96,7 @@ body {
     padding: 20px;
     background-color: #f4f4f4;
     text-align: center;
-    max-width: 100%; /* Asegura que la columna izquierda no se desborde */
+    max-width: 100%; 
 }
 
 .right-column {
@@ -155,7 +154,7 @@ button {
 }
 
 .social-icons img {
-    width: 40px; /* Tamaño de los iconos de redes sociales */
+    width: 40px; 
     height: 40px;
 }
 
@@ -168,7 +167,7 @@ button {
     }
 
     .right-column {
-        min-width: 100%; /* La columna derecha ocupa el 100% del ancho disponible */
+        min-width: 100%; 
     }
 
     .left-column p {
@@ -181,25 +180,25 @@ button {
     }
 
     .hamburger {
-        display: block; /* Mostrar el botón de hamburguesa en móviles */
+        display: block; 
     }
 
     .sidebar {
-        transform: translateX(-150px); /* Ocultar el sidebar inicialmente en móviles */
+        transform: translateX(-150px); 
     }
 
     .sidebar.active {
-        transform: translateX(0); /* Mostrar el sidebar cuando el botón de hamburguesa se activa */
+        transform: translateX(0); 
     }
 
     .container {
-        flex-direction: column; /* Cambia la dirección del flex en pantallas pequeñas */
-        padding-left: 0; /* Elimina el margen izquierdo para pantallas pequeñas */
+        flex-direction: column; 
+        padding-left: 0; 
     }
 
     .left-column,
     .right-column {
-        max-width: 100%; /* Asegura que las columnas ocupen el 100% del ancho disponible */
+        max-width: 100%; 
         flex: 1 1 100%;
     }
 }
