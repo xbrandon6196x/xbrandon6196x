@@ -3,6 +3,7 @@ body {
     font-family: Arial, sans-serif;
     background-color: #fff;
     display: flex;
+    flex-direction: column; /* Asegura que todo se alinee verticalmente */
 }
 
 .sidebar {
@@ -54,7 +55,6 @@ body {
     margin-bottom: 5px;
 }
 
-/* Estilos del botón de hamburguesa, inicialmente oculto en pantallas grandes */
 .hamburger {
     background: none;
     border: none;
@@ -130,11 +130,12 @@ button {
     padding: 10px 20px;
     background-color: #00c601;
     color: white;
-    border: none;
+    border: 2px solid #fff; /* Esto asegura que el borde esté visible */
     border-radius: 5px;
     cursor: pointer;
     font-size: 1em;
 }
+
 
 .right-column img {
     max-width: 100%;
@@ -156,6 +157,33 @@ button {
 .social-icons img {
     width: 40px; 
     height: 40px;
+}
+
+/* Estilos para la sección Acerca de mí */
+.about-me-section {
+    
+    background-color: #00c601; /* Fondo verde */
+    color: white;
+    text-align: center;
+    padding: 50px 0;
+    width: 100%; /* Ocupar todo el ancho */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px; /* Añade un espacio para separarlo del contenido principal */
+}
+
+.about-me-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.about-me-buttons {
+    display: flex;
+    justify-content: center; /* Asegurar que los botones estén centrados */
+    gap: 10px; /* Añadir espacio entre los botones */
+    margin-top: 20px;
 }
 
 /* Ajustes responsivos */
@@ -180,25 +208,14 @@ button {
     }
 
     .hamburger {
-        display: block; 
+        display: block;
     }
 
     .sidebar {
-        transform: translateX(-150px); 
+        transform: translateX(-100%);
     }
 
     .sidebar.active {
-        transform: translateX(0); 
-    }
-
-    .container {
-        flex-direction: column; 
-        padding-left: 0; 
-    }
-
-    .left-column,
-    .right-column {
-        max-width: 100%; 
-        flex: 1 1 100%;
+        transform: translateX(0);
     }
 }

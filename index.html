@@ -71,6 +71,20 @@
         </div>
     </div>
 
+    <!-- Nueva sección "Acerca de mí" movida debajo -->
+    <section id="about-me" class="about-me-section">
+        <div class="about-me-container">
+            <p>Así que quieres saber más de mí!<br>
+            De acuerdo, empecemos.<br>
+            ¿Qué te interesa saber de mí?</p>
+            <div class="about-me-buttons">
+                <button>Personalmente</button>
+                <button>Laboralmente</button>
+                <button>Personalmente</button>
+            </div>
+        </div>
+    </section>
+
     <script>
         // Toggle del menú de hamburguesa
         const hamburger = document.getElementById('hamburger');
@@ -78,6 +92,11 @@
 
         hamburger.addEventListener('click', () => {
             sidebar.classList.toggle('active');
+        });
+
+        // Scroll suave para el botón principal
+        document.querySelector("button").addEventListener("click", function() {
+            document.getElementById("about-me").scrollIntoView({ behavior: 'smooth' });
         });
     </script>
 </body>
