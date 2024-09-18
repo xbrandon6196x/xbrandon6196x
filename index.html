@@ -4,22 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portafolio</title>
-    <link rel="stylesheet" href="/CSS/styles.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="/CSS/styles.css">
 </head>
 <body>
+    <button class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
 
-    <!-- Sección de Introducción -->
+    <div class="sidebar" id="sidebar">
+        <ul>
+            <li>
+                <a href="#" class="bk-icon">
+                    <img src="/ASSETS/bk_icon.png" alt="BK Logo">
+                </a>
+            </li>
+            <li>
+                <a href="#acerca-de-mi" class="sidebar-logos">
+                    <img src="/ASSETS/contacto_icon.png" alt="Acerca de mí">
+                    Acerca de mí
+                </a>
+            </li>
+            <li>
+                <a href="#experiencia" class="sidebar-logos">
+                    <img src="/ASSETS/work_icon.png" alt="Experiencia">
+                    Experiencia
+                </a>
+            </li>
+            <li>
+                <a href="#proyectos" class="sidebar-logos">
+                    <img src="/ASSETS/proyects_icon.png" alt="Proyectos">
+                    Proyectos
+                </a>
+            </li>
+            <li>
+                <a href="#contacto" class="sidebar-logos">
+                    <img src="/ASSETS/contact_icon.png" alt="Contacto">
+                    Contacto
+                </a>
+            </li>
+            <li>
+                <a href="#english" class="sidebar-logos">
+                    <img src="/ASSETS/translate_icon.png" alt="English">
+                    English
+                </a>
+            </li>
+        </ul>
+    </div>
+
     <div class="container">
         <div class="left-column">
             <h1>Hola, soy <span>Brand Keymolent!</span></h1>
-            <p>Cambio de prueba</p>
-            <p>El novato creció aunque nadie lo salvó, probó el poder y en su plena demencia, al fin. My own hero 👽</p>
-            <button>Mas sobre mi</button>
+            <p>Actualmente soy estudiante de Ingeniería de Software y Redes, con experiencia en Telecomunicaciones y Front-End. Además, he tomado cursos certificados que podrás ver en mi página web.</p>
+            <p>¡Bienvenido a mi portafolio<br>espero te interese saber un poco de mí!</p>
+            <button>Aqui para más sobre mí</button>
+            <div class="social-icons">
+                <a href="#"><img src="/ASSETS/github_icon.png" alt="GitHub"></a>
+                <a href="#"><img src="/ASSETS/linkedin_icon.png" alt="LinkedIn"></a>
+                <a href="#"><img src="/ASSETS/instagram_icon.png" alt="Instagram"></a>
+                <a href="#"><img src="/ASSETS/platzi_logo_icon.png" alt="Portfolio"></a>
+            </div>
         </div>
         <div class="right-column">
-            <img src="/ASSETS/Brand_Key_Img_Intro.jpg" alt="Brand Keymolent">
+            <img src="/ASSETS/brand_perfil_icon.png" alt="Brand Keymolent Foto Perfil">
         </div>
     </div>
-    
-    </body>
-    </html>
+
+    <script>
+        // Toggle del menú de hamburguesa
+        const hamburger = document.getElementById('hamburger');
+        const sidebar = document.getElementById('sidebar');
+
+        hamburger.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
