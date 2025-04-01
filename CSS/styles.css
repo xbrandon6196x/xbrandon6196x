@@ -3,7 +3,9 @@ body {
     font-family: Arial, sans-serif;
     background-color: #fff;
     display: flex;
-    flex-direction: column; /* Asegura que todo se alinee verticalmente */
+    flex-direction: column;
+    height: 100%;
+    overflow-x: hidden; /* Eliminar el desplazamiento horizontal */
 }
 
 .sidebar {
@@ -13,11 +15,12 @@ body {
     flex-direction: column;
     align-items: center;
     padding-top: 100px;
-    position: fixed; 
+    position: fixed;
     top: 0;
     left: 0;
     height: 100%;
     transition: transform 0.3s ease-in-out;
+    z-index: 1000;
 }
 
 .sidebar ul {
@@ -55,6 +58,7 @@ body {
     margin-bottom: 5px;
 }
 
+/* Menú hamburguesa fijo arriba */
 .hamburger {
     background: none;
     border: none;
@@ -63,8 +67,8 @@ body {
     position: fixed;
     top: 10px;
     left: 10px;
-    z-index: 1000;
-    display: none;
+    z-index: 1001;
+    display: block;
 }
 
 .hamburger span {
@@ -76,15 +80,17 @@ body {
     transition: 0.4s;
 }
 
+/* Ajuste del contenedor principal */
 .container {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    max-width: 1200px;
-    margin: auto;
-    padding-left: 170px; 
+    max-width: 100%;
+    margin: 0;
+    padding-left: 170px;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 .left-column {
@@ -96,23 +102,33 @@ body {
     padding: 20px;
     background-color: #f4f4f4;
     text-align: center;
-    max-width: 100%; 
+    max-width: 100%;
 }
 
-.right-column {
-    flex: 1;
-    min-width: 300px;
-    background-color: #00c601;
+.profile-image-container {
+    width: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
+    justify-content: center;  /* Centra horizontalmente */
+    align-items: center;  /* Centra verticalmente */
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.profile-image-container img {
+    max-width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 10px;
+    margin-left: 120px;  /* Ajusta el margen izquierdo */
 }
 
 h1 {
-    font-size: 2em;
+    font-size: 3em;
     color: #333;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    font-weight: bold;
 }
 
 h1 span {
@@ -120,9 +136,11 @@ h1 span {
 }
 
 p {
-    font-size: 1em;
-    color: #333;
+    font-size: 1.1em;
+    color: #555;
+    line-height: 1.6;
     margin-top: 20px;
+    max-width: 600px;
 }
 
 button {
@@ -130,17 +148,16 @@ button {
     padding: 10px 20px;
     background-color: #00c601;
     color: white;
-    border: 2px solid #fff; /* Esto asegura que el borde esté visible */
+    border: 2px solid #fff;
     border-radius: 5px;
     cursor: pointer;
     font-size: 1em;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
-
-.right-column img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
+button:hover {
+    background-color: #007700;
+    transform: scale(1.05);
 }
 
 .social-icons {
@@ -155,60 +172,147 @@ button {
 }
 
 .social-icons img {
-    width: 40px; 
+    width: 40px;
     height: 40px;
 }
 
-/* Estilos para la sección Acerca de mí */
 .about-me-section {
-    
-    background-color: #00c601; /* Fondo verde */
-    color: white;
+    background-color: #f4f4f4;
+    color: #333;
     text-align: center;
-    padding: 50px 0;
-    width: 100%; /* Ocupar todo el ancho */
+    padding: 50px 20px;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 50px; /* Añade un espacio para separarlo del contenido principal */
+    margin-top: 50px;
+    border-radius: 8px;
+    margin-left: 50px;
+    margin-right: 50px;
 }
 
+/* Ajuste de la imagen en la sección */
 .about-me-container {
     max-width: 1000px;
     margin: 0 auto;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.about-me-container p {
+    font-size: 1.2em;
+    color: #333;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    max-width: 90%;
 }
 
 .about-me-buttons {
     display: flex;
-    justify-content: center; /* Asegurar que los botones estén centrados */
-    gap: 10px; /* Añadir espacio entre los botones */
+    justify-content: center;
+    gap: 20px;
     margin-top: 20px;
+    flex-wrap: wrap;
 }
 
-/* Ajustes responsivos */
+.about-me-buttons button {
+    padding: 12px 25px;
+    font-size: 1em;
+    background-color: #00c601;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    transition: transform 0.3s;
+    margin: 10px 0;
+    width: 200px;
+}
 
-@media (max-width: 1024px) {
-    .container {
+.about-me-buttons button:hover {
+    transform: scale(1.05);
+}
+
+#about-me {
+    background-color: #f4f4f4;
+    padding: 50px 20px;
+}
+
+.about-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 0 0 200px;
+}
+
+.about-text {
+    flex: 1;
+    padding: 20px;
+    text-align: left;
+}
+
+.about-text p {
+    font-size: 1.1em;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.about-image {
+    flex: 1;
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+    .about-me-section {
+        padding: 20px 10px;
+    }
+
+    .about-container {
         flex-direction: column;
+        align-items: center;
+    }
+
+    .about-text {
+        padding: 15px;
+        text-align: center;
+        max-width: 90%;
+    }
+
+    .about-image img {
+        width: 100%;
         height: auto;
+        object-fit: cover;
+        border-radius: 10px;
     }
 
-    .right-column {
-        min-width: 100%; 
+    .container {
+        padding-left: 0;
+        flex-direction: column;
+        align-items: center;
     }
 
-    .left-column p {
+    .left-column {
+        width: 100%;
+        padding: 20px;
         text-align: center;
     }
 
-    button {
-        display: block;
-        margin: 20px auto 0;
-    }
-
     .hamburger {
-        display: block;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 1001;
     }
 
     .sidebar {
@@ -217,5 +321,10 @@ button {
 
     .sidebar.active {
         transform: translateX(0);
+    }
+
+    /* Ajustar el margen para el contenido */
+    .about-container {
+        margin: 0;
     }
 }

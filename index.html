@@ -7,6 +7,17 @@
     <link rel="stylesheet" href="/CSS/styles.css">
 </head>
 <body>
+    <!-- Audio de fondo -->
+    <audio id="background-music" loop autoplay>
+        <source src="/ASSETS/when-the-music-drops.mp3" type="audio/mp3">
+        Tu navegador no soporta el audio HTML5.
+    </audio>
+    
+    <script>
+        // Control del volumen del audio
+        document.getElementById("background-music").volume = 0.1;  // 0.1 es el volumen mínimo
+    </script>
+
     <button class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -16,36 +27,36 @@
     <div class="sidebar" id="sidebar">
         <ul>
             <li>
-                <a href="#" class="bk-icon">
+                <a href="javascript:void(0)" class="bk-icon">
                     <img src="/ASSETS/bk_icon.png" alt="BK Logo">
                 </a>
             </li>
             <li>
-                <a href="#acerca-de-mi" class="sidebar-logos">
+                <a href="javascript:void(0)" class="sidebar-logos">
                     <img src="/ASSETS/contacto_icon.png" alt="Acerca de mí">
                     Acerca de mí
                 </a>
             </li>
             <li>
-                <a href="#experiencia" class="sidebar-logos">
+                <a href="javascript:void(0)" class="sidebar-logos">
                     <img src="/ASSETS/work_icon.png" alt="Experiencia">
                     Experiencia
                 </a>
             </li>
             <li>
-                <a href="#proyectos" class="sidebar-logos">
+                <a href="javascript:void(0)" class="sidebar-logos">
                     <img src="/ASSETS/proyects_icon.png" alt="Proyectos">
                     Proyectos
                 </a>
             </li>
             <li>
-                <a href="#contacto" class="sidebar-logos">
+                <a href="javascript:void(0)" class="sidebar-logos">
                     <img src="/ASSETS/contact_icon.png" alt="Contacto">
                     Contacto
                 </a>
             </li>
             <li>
-                <a href="#english" class="sidebar-logos">
+                <a href="javascript:void(0)" class="sidebar-logos">
                     <img src="/ASSETS/translate_icon.png" alt="English">
                     English
                 </a>
@@ -58,7 +69,7 @@
             <h1>Hola, soy <span>Brand Keymolent!</span></h1>
             <p>Actualmente soy estudiante de Ingeniería de Software y Redes, con experiencia en Telecomunicaciones y Front-End. Además, he tomado cursos certificados que podrás ver en mi página web.</p>
             <p>¡Bienvenido a mi portafolio<br>espero te interese saber un poco de mí!</p>
-            <button>Aqui para más sobre mí</button>
+            <button>Aquí para más sobre mí</button>
             <div class="social-icons">
                 <a href="#"><img src="/ASSETS/github_icon.png" alt="GitHub"></a>
                 <a href="#"><img src="/ASSETS/linkedin_icon.png" alt="LinkedIn"></a>
@@ -66,12 +77,13 @@
                 <a href="#"><img src="/ASSETS/platzi_logo_icon.png" alt="Portfolio"></a>
             </div>
         </div>
-        <div class="right-column">
-            <img src="/ASSETS/brand_perfil_icon.png" alt="Brand Keymolent Foto Perfil">
-        </div>
     </div>
 
-    <!-- Nueva sección "Acerca de mí" movida debajo -->
+    <!-- Nueva sección para la imagen de perfil -->
+    <div class="profile-image-container">
+        <img src="/ASSETS/brand_perfil_icon.png" alt="Brand Keymolent Foto Perfil">
+    </div>
+
     <section id="about-me" class="about-me-section">
         <div class="about-me-container">
             <p>Así que quieres saber más de mí!<br>
@@ -80,23 +92,32 @@
             <div class="about-me-buttons">
                 <button>Personalmente</button>
                 <button>Laboralmente</button>
-                <button>Personalmente</button>
+                <button>Ambos</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="acerca-de-mi">
+        <div class="about-container">
+            <div class="about-text">
+                <p>Soy de CDMX y actualmente vivo en el centro junto a mi primo Irving y su perrito Kenai. Por mi parte, tengo un perro llamado Voldy, referencia a Voldemort de la saga de libros de Harry Potter, de la cual soy un gran fan desde niño. También me encanta Batman.</p>
+                <p>El fútbol es otra de mis pasiones. Desde pequeño he sido fanático del Real Madrid, y uno de mis sueños es vivir en Madrid, España, cerca de una estación de metro para poder asistir a los partidos la mayor cantidad de fines de semana posible.</p>
+                <p>Entre mis bebidas favoritas están el mate y el agua de sandía o mango.</p>
+                <p>Disfruto mucho pasar el tiempo en casa jugando videojuegos, especialmente mientras escucho música de Portugal. The Man, Rels B, o alguna canción interesante que encuentre en internet.</p>
+                <p>De hecho, ahora mismo estás escuchando mi canción favorita del momento. ¿Qué te parece?</p>
+            </div>
+            <div class="about-image">
+                <img src="/ASSETS/fotos_collage.png" alt="Imagen larga rectangular">
             </div>
         </div>
     </section>
 
     <script>
-        // Toggle del menú de hamburguesa
         const hamburger = document.getElementById('hamburger');
         const sidebar = document.getElementById('sidebar');
 
         hamburger.addEventListener('click', () => {
             sidebar.classList.toggle('active');
-        });
-
-        // Scroll suave para el botón principal
-        document.querySelector("button").addEventListener("click", function() {
-            document.getElementById("about-me").scrollIntoView({ behavior: 'smooth' });
         });
     </script>
 </body>
