@@ -1,124 +1,257 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio</title>
-    <link rel="stylesheet" href="/CSS/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brand Keymolent | Portafolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="CSS/styles.css">
 </head>
 <body>
-    <!-- Audio de fondo -->
-    <audio id="background-music" loop autoplay>
-        <source src="/ASSETS/when-the-music-drops.mp3" type="audio/mp3">
-        Tu navegador no soporta el audio HTML5.
-    </audio>
-    
-    <script>
-        // Control del volumen del audio
-        document.getElementById("background-music").volume = 0.1;  // 0.1 es el volumen mínimo
-    </script>
 
-    <button class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
+<!-- Audio -->
+<audio id="bg-music" loop>
+  <source src="/ASSETS/when-the-music-drops.mp3" type="audio/mp3">
+</audio>
 
-    <div class="sidebar" id="sidebar">
-        <ul>
-            <li>
-                <a href="javascript:void(0)" class="bk-icon">
-                    <img src="/ASSETS/bk_icon.png" alt="BK Logo">
-                </a>
-            </li>
-            <li>
-                <a href="javascript:void(0)" class="sidebar-logos">
-                    <img src="/ASSETS/contacto_icon.png" alt="Acerca de mí">
-                    Acerca de mí
-                </a>
-            </li>
-            <li>
-                <a href="javascript:void(0)" class="sidebar-logos">
-                    <img src="/ASSETS/work_icon.png" alt="Experiencia">
-                    Experiencia
-                </a>
-            </li>
-            <li>
-                <a href="javascript:void(0)" class="sidebar-logos">
-                    <img src="/ASSETS/proyects_icon.png" alt="Proyectos">
-                    Proyectos
-                </a>
-            </li>
-            <li>
-                <a href="javascript:void(0)" class="sidebar-logos">
-                    <img src="/ASSETS/contact_icon.png" alt="Contacto">
-                    Contacto
-                </a>
-            </li>
-            <li>
-                <a href="javascript:void(0)" class="sidebar-logos">
-                    <img src="/ASSETS/translate_icon.png" alt="English">
-                    English
-                </a>
-            </li>
-        </ul>
+<!-- Hamburger -->
+<button class="hamburger" id="hamburger">
+  <span></span><span></span><span></span>
+</button>
+
+<!-- Sidebar -->
+<nav class="sidebar" id="sidebar">
+  <ul>
+    <li>
+      <a href="#hero" class="bk-icon">
+        <img src="/ASSETS/bk_icon.png" alt="BK Logo">
+      </a>
+    </li>
+    <li>
+      <a href="#about" class="sidebar-logos">
+        <img src="/ASSETS/contacto_icon.png" alt="">
+        <span class="i18n" data-es="Acerca de mí" data-en="About me">Acerca de mí</span>
+      </a>
+    </li>
+    <li>
+      <a href="#skills" class="sidebar-logos">
+        <img src="/ASSETS/work_icon.png" alt="">
+        <span class="i18n" data-es="Habilidades" data-en="Skills">Habilidades</span>
+      </a>
+    </li>
+    <li>
+      <a href="#projects" class="sidebar-logos">
+        <img src="/ASSETS/proyects_icon.png" alt="">
+        <span class="i18n" data-es="Proyectos" data-en="Projects">Proyectos</span>
+      </a>
+    </li>
+    <li>
+      <a href="#contact" class="sidebar-logos">
+        <img src="/ASSETS/contact_icon.png" alt="">
+        <span class="i18n" data-es="Contacto" data-en="Contact">Contacto</span>
+      </a>
+    </li>
+    <li>
+      <a href="javascript:void(0)" class="sidebar-logos" id="langToggle">
+        <img src="/ASSETS/translate_icon.png" alt="">
+        <span id="langLabel">English</span>
+      </a>
+    </li>
+    <li>
+      <a href="javascript:void(0)" class="sidebar-logos" id="themeToggle">
+        <span id="themeIcon" style="font-size:1.6em;">🌙</span>
+        <span id="themeLabel" class="i18n" data-es="Oscuro" data-en="Dark">Oscuro</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<!-- ── PAGE ── -->
+<div class="page-content">
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-text">
+      <div class="hero-tag i18n" data-es="👋 Bienvenido a mi portafolio" data-en="👋 Welcome to my portfolio">👋 Bienvenido a mi portafolio</div>
+      <h1><span class="i18n" data-es="Hola, soy" data-en="Hi, I'm">Hola, soy</span><br><span class="green">Brand Keymolent</span></h1>
+      <p class="i18n" data-es="Estudiante de Ingeniería de Software y Redes, con experiencia en Telecomunicaciones y Front-End." data-en="Software and Networks Engineering student, with experience in Telecommunications and Front-End development.">Estudiante de Ingeniería de Software y Redes, con experiencia en Telecomunicaciones y Front-End.</p>
+      <p class="i18n" data-es="Apasionado por construir soluciones elegantes y funcionales para la web." data-en="Passionate about building elegant and functional solutions for the web.">Apasionado por construir soluciones elegantes y funcionales para la web.</p>
+      <div class="hero-actions">
+        <a href="#about" class="btn-primary i18n" data-es="Conóceme más" data-en="Know more">Conóceme más</a>
+        <a href="#contact" class="btn-outline i18n" data-es="Contáctame" data-en="Contact me">Contáctame</a>
+      </div>
+      <div class="social-icons">
+        <a href="https://mx.linkedin.com/in/brandonkeymolent" target="_blank"><img src="/ASSETS/linkedin_icon.png" alt="LinkedIn"></a>
+        <a href="https://github.com/xbrandon6196x" target="_blank"><img src="/ASSETS/github_icon.png" alt="GitHub"></a>
+        <a href="https://www.instagram.com/brandkeytrouble/" target="_blank"><img src="/ASSETS/instagram_icon.png" alt="Instagram"></a>
+        <a href="https://platzi.com/p/xbrandon6196x/" target="_blank"><img src="/ASSETS/platzi_logo_icon.png" alt="Platzi"></a>
+      </div>
     </div>
-
-    <div class="container">
-        <div class="left-column">
-            <h1>Hola, soy <span>Brand Keymolent!</span></h1>
-            <p>Actualmente soy estudiante de Ingeniería de Software y Redes, con experiencia en Telecomunicaciones y Front-End. Además, he tomado cursos certificados que podrás ver en mi página web.</p>
-            <p>¡Bienvenido a mi portafolio<br>espero te interese saber un poco de mí!</p>
-            <button>Aquí para más sobre mí</button>
-            <div class="social-icons">
-                <a href="#"><img src="/ASSETS/github_icon.png" alt="GitHub"></a>
-                <a href="#"><img src="/ASSETS/linkedin_icon.png" alt="LinkedIn"></a>
-                <a href="#"><img src="/ASSETS/instagram_icon.png" alt="Instagram"></a>
-                <a href="#"><img src="/ASSETS/platzi_logo_icon.png" alt="Portfolio"></a>
-            </div>
-        </div>
+    <div class="hero-image">
+      <img src="/ASSETS/brand_perfil_icon.png" alt="Brand Keymolent">
     </div>
+  </section>
 
-    <!-- Nueva sección para la imagen de perfil -->
-    <div class="profile-image-container">
-        <img src="/ASSETS/brand_perfil_icon.png" alt="Brand Keymolent Foto Perfil">
+  <div class="section-divider"></div>
+
+  <!-- ABOUT CHOICE -->
+  <div id="about" class="about-choice">
+    <h2><span class="i18n" data-es="¿Qué quieres saber " data-en="What do you want to know ">¿Qué quieres saber </span><span class="green i18n" data-es="de mí?" data-en="about me?">de mí?</span></h2>
+    <p class="i18n" data-es="Elige lo que más te interese" data-en="Choose what interests you most">Elige lo que más te interese</p>
+    <div class="choice-buttons">
+      <button class="choice-btn active" id="btn-personal" onclick="showPanel('personal', event)">
+        🙋 <span class="i18n" data-es="Personalmente" data-en="Personally">Personalmente</span>
+      </button>
+      <button class="choice-btn" id="btn-work" onclick="showPanel('work', event)">
+        💼 <span class="i18n" data-es="Laboralmente" data-en="Professionally">Laboralmente</span>
+      </button>
+      <button class="choice-btn" id="btn-both" onclick="showPanel('both', event)">
+        ✨ <span class="i18n" data-es="Ambos" data-en="Both">Ambos</span>
+      </button>
     </div>
+  </div>
 
-    <section id="about-me" class="about-me-section">
-        <div class="about-me-container">
-            <p>Así que quieres saber más de mí!<br>
-            De acuerdo, empecemos.<br>
-            ¿Qué te interesa saber de mí?</p>
-            <div class="about-me-buttons">
-                <button>Personalmente</button>
-                <button>Laboralmente</button>
-                <button>Ambos</button>
-            </div>
+  <!-- ABOUT PERSONAL (visible by default) -->
+  <div id="panel-personal" class="about-panel visible">
+    <div class="about-panel-text">
+      <p><span class="i18n" data-es="Soy de CDMX y actualmente vivo en el centro junto a mi primo Irving y su perrito Kenai. Por mi parte, tengo un perro llamado " data-en="I'm from CDMX and currently live downtown with my cousin Irving and his dog Kenai. I have a dog named ">Soy de CDMX y actualmente vivo en el centro junto a mi primo Irving y su perrito Kenai. Por mi parte, tengo un perro llamado </span><strong>Voldy</strong> — <span class="i18n" data-es="referencia a Voldemort de Harry Potter, del cual soy fan desde niño. También soy un gran fan de " data-en="a reference to Voldemort from Harry Potter, which I've been a fan of since childhood. I'm also a huge fan of ">referencia a Voldemort de Harry Potter, del cual soy fan desde niño. También soy un gran fan de </span><strong>Batman</strong>. 🦇</p>
+      <p><span class="i18n" data-es="El fútbol es otra de mis pasiones. Desde pequeño he sido fanático del " data-en="Football is another one of my passions. I've been a fan of ">El fútbol es otra de mis pasiones. Desde pequeño he sido fanático del </span><strong>Real Madrid</strong><span class="i18n" data-es=", y uno de mis sueños es vivir en Madrid, España. 🏟️" data-en=" since I was a kid, and one of my dreams is to live in Madrid, Spain. 🏟️">, y uno de mis sueños es vivir en Madrid, España. 🏟️</span></p>
+      <p class="i18n" data-es="Entre mis bebidas favoritas: mate, agua de sandía o mango." data-en="My favorite drinks: mate, watermelon or mango water.">Entre mis bebidas favoritas: mate, agua de sandía o mango.</p>
+      <p><span class="i18n" data-es="Disfruto mucho los videojuegos en casa mientras escucho música de " data-en="I really enjoy video games at home while listening to music by ">Disfruto mucho los videojuegos en casa mientras escucho música de </span><strong>Portugal. The Man</strong>, <strong>Rels B</strong><span class="i18n" data-es=", o lo que encuentre navegando. Y de hecho... ¡ahora mismo estás escuchando mi canción favorita del momento! 🎵" data-en=", or whatever I find while browsing. And actually... you're listening to my favorite song right now! 🎵">, o lo que encuentre navegando. Y de hecho... ¡ahora mismo estás escuchando mi canción favorita del momento! 🎵</span></p>
+    </div>
+    <div class="about-panel-img">
+      <img src="/ASSETS/fotos_collage.png" alt="Collage de fotos">
+    </div>
+  </div>
+
+  <!-- ABOUT WORK -->
+  <div id="panel-work" class="about-panel reverse">
+    <div class="about-panel-text">
+      <p><span class="i18n" data-es="Soy estudiante de " data-en="I'm a ">Soy estudiante de </span><strong><span class="i18n" data-es="Ingeniería de Software y Redes" data-en="Software and Networks Engineering">Ingeniería de Software y Redes</span></strong><span class="i18n" data-es=", con experiencia práctica en " data-en=" student, with hands-on experience in ">, con experiencia práctica en </span><strong><span class="i18n" data-es="Telecomunicaciones" data-en="Telecommunications">Telecomunicaciones</span></strong><span class="i18n" data-es=" y desarrollo " data-en=" and "> y desarrollo </span><strong>Front-End</strong>.</p>
+      <p><span class="i18n" data-es="He tomado cursos certificados en plataformas como " data-en="I have completed certified courses on platforms like ">He tomado cursos certificados en plataformas como </span><strong>Platzi</strong><span class="i18n" data-es=", cubriendo tecnologías modernas de desarrollo web, redes y más." data-en=", covering modern web development technologies, networking, and more.">, cubriendo tecnologías modernas de desarrollo web, redes y más.</span></p>
+      <p class="i18n" data-es="Me interesa diseñar interfaces limpias y funcionales que combinen buen rendimiento con una excelente experiencia de usuario." data-en="I'm interested in designing clean, functional interfaces that combine good performance with an excellent user experience.">Me interesa diseñar interfaces limpias y funcionales que combinen buen rendimiento con una excelente experiencia de usuario.</p>
+    </div>
+    <div class="about-panel-img">
+      <img src="/ASSETS/fotos_collage.png" alt="Collage de trabajo">
+    </div>
+  </div>
+
+  <!-- ABOUT BOTH -->
+  <div id="panel-both" class="about-panel">
+    <div class="about-panel-text">
+      <p><span class="i18n" data-es="Soy de CDMX, fan de " data-en="I'm from CDMX, a fan of ">Soy de CDMX, fan de </span><strong>Harry Potter</strong>, <strong>Batman</strong><span class="i18n" data-es=" y el " data-en=" and "> y el </span><strong>Real Madrid</strong><span class="i18n" data-es=". Vivo rodeado de buena música, videojuegos y un perro llamado Voldy. 🐶" data-en=". I live surrounded by good music, video games and a dog named Voldy. 🐶">. Vivo rodeado de buena música, videojuegos y un perro llamado Voldy. 🐶</span></p>
+      <p><span class="i18n" data-es="Profesionalmente, estudio " data-en="Professionally, I study ">Profesionalmente, estudio </span><strong><span class="i18n" data-es="Ingeniería de Software y Redes" data-en="Software and Networks Engineering">Ingeniería de Software y Redes</span></strong><span class="i18n" data-es=" y tengo experiencia en Telecomunicaciones y Front-End." data-en=" and have experience in Telecommunications and Front-End."> y tengo experiencia en Telecomunicaciones y Front-End.</span></p>
+      <p class="i18n" data-es="Mi objetivo es combinar mi pasión por la tecnología con mi gusto por el diseño para crear productos digitales que realmente valgan la pena. ¡Bienvenido a mi portafolio! 🚀" data-en="My goal is to combine my passion for technology with my taste for design to create digital products that are truly worthwhile. Welcome to my portfolio! 🚀">Mi objetivo es combinar mi pasión por la tecnología con mi gusto por el diseño para crear productos digitales que realmente valgan la pena. ¡Bienvenido a mi portafolio! 🚀</p>
+    </div>
+    <div class="about-panel-img">
+      <img src="/ASSETS/fotos_collage.png" alt="Collage">
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <h2><span class="i18n" data-es="Mis " data-en="My ">Mis </span><span class="green i18n" data-es="Habilidades" data-en="Skills">Habilidades</span></h2>
+    <p class="section-subtitle i18n" data-es="Tecnologías y áreas en las que tengo experiencia" data-en="Technologies and areas I have experience in">Tecnologías y áreas en las que tengo experiencia</p>
+    <div class="skills-grid">
+      <div class="skill-card"><span>🌐</span>HTML5</div>
+      <div class="skill-card"><span>🎨</span>CSS3</div>
+      <div class="skill-card"><span>⚡</span>JavaScript</div>
+      <div class="skill-card"><span>📱</span>Responsive Design</div>
+      <div class="skill-card"><span>🔧</span>Git & GitHub</div>
+      <div class="skill-card"><span>🌍</span><span class="i18n" data-es="Redes" data-en="Networking">Redes</span></div>
+      <div class="skill-card"><span>📡</span>Telecom</div>
+      <div class="skill-card"><span>🐍</span>Python</div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <h2><span class="i18n" data-es="Mis " data-en="My ">Mis </span><span class="green i18n" data-es="Proyectos" data-en="Projects">Proyectos</span></h2>
+    <p class="section-subtitle i18n" data-es="Algunos de los trabajos en los que he colaborado o desarrollado" data-en="Some of the projects I've collaborated on or built">Algunos de los trabajos en los que he colaborado o desarrollado</p>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-card-header"></div>
+        <div class="project-card-body">
+          <h3><span class="i18n" data-es="Portafolio Web" data-en="Web Portfolio">Portafolio Web</span></h3>
+          <p class="i18n" data-es="Sitio web personal construido desde cero con HTML, CSS y JavaScript vanilla. Diseño responsivo y personalizable." data-en="Personal website built from scratch with HTML, CSS and vanilla JavaScript. Responsive and customizable design.">Sitio web personal construido desde cero con HTML, CSS y JavaScript vanilla. Diseño responsivo y personalizable.</p>
+          <span class="project-tag">HTML</span><span class="project-tag">CSS</span><span class="project-tag">JS</span>
         </div>
-    </section>
-
-    <section id="acerca-de-mi">
-        <div class="about-container">
-            <div class="about-text">
-                <p>Soy de CDMX y actualmente vivo en el centro junto a mi primo Irving y su perrito Kenai. Por mi parte, tengo un perro llamado Voldy, referencia a Voldemort de la saga de libros de Harry Potter, de la cual soy un gran fan desde niño. También me encanta Batman.</p>
-                <p>El fútbol es otra de mis pasiones. Desde pequeño he sido fanático del Real Madrid, y uno de mis sueños es vivir en Madrid, España, cerca de una estación de metro para poder asistir a los partidos la mayor cantidad de fines de semana posible.</p>
-                <p>Entre mis bebidas favoritas están el mate y el agua de sandía o mango.</p>
-                <p>Disfruto mucho pasar el tiempo en casa jugando videojuegos, especialmente mientras escucho música de Portugal. The Man, Rels B, o alguna canción interesante que encuentre en internet.</p>
-                <p>De hecho, ahora mismo estás escuchando mi canción favorita del momento. ¿Qué te parece?</p>
-            </div>
-            <div class="about-image">
-                <img src="/ASSETS/fotos_collage.png" alt="Imagen larga rectangular">
-            </div>
+      </div>
+      <div class="project-card">
+        <div class="project-card-header"></div>
+        <div class="project-card-body">
+          <h3>Proyecto 2</h3>
+          <p class="i18n" data-es="Descripción de tu segundo proyecto. Puedes actualizar esto con tus proyectos reales." data-en="Description of your second project. You can update this with your real projects.">Descripción de tu segundo proyecto. Puedes actualizar esto con tus proyectos reales.</p>
+          <span class="project-tag i18n" data-es="En construcción" data-en="In progress">En construcción</span>
         </div>
-    </section>
+      </div>
+      <div class="project-card">
+        <div class="project-card-header"></div>
+        <div class="project-card-body">
+          <h3>Proyecto 3</h3>
+          <p class="i18n" data-es="Agrega tus proyectos de Platzi o universitarios aquí." data-en="Add your Platzi or university projects here.">Agrega tus proyectos de Platzi o universitarios aquí.</p>
+          <span class="project-tag i18n" data-es="Próximamente" data-en="Coming soon">Próximamente</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        const hamburger = document.getElementById('hamburger');
-        const sidebar = document.getElementById('sidebar');
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2><span class="i18n" data-es="Vamos a " data-en="Let's ">Vamos a </span><span class="green i18n" data-es="Hablar" data-en="Talk">Hablar</span></h2>
+    <p class="section-subtitle i18n" data-es="Estoy abierto a nuevas oportunidades y colaboraciones" data-en="I'm open to new opportunities and collaborations">Estoy abierto a nuevas oportunidades y colaboraciones</p>
+    <div class="contact-wrapper">
+      <div class="contact-info">
+        <p class="i18n" data-es="Si tienes un proyecto en mente, quieres colaborar, o simplemente saludar, ¡escríbeme! Siempre estoy dispuesto a conectar con personas interesantes. 🙌" data-en="If you have a project in mind, want to collaborate, or just say hi — reach out! I'm always happy to connect with interesting people. 🙌">Si tienes un proyecto en mente, quieres colaborar, o simplemente saludar, ¡escríbeme! Siempre estoy dispuesto a conectar con personas interesantes. 🙌</p>
+        <div class="contact-links">
+          <a href="mailto:contacto_brandonkeymolent@gmail.com" class="contact-link">
+            <span style="font-size:1.5em;">✉️</span> contacto_brandonkeymolent@gmail.com
+          </a>
+          <a href="https://mx.linkedin.com/in/brandonkeymolent" target="_blank" class="contact-link">
+            <img src="/ASSETS/linkedin_icon.png" alt="LinkedIn"> LinkedIn
+          </a>
+          <a href="https://github.com/xbrandon6196x" target="_blank" class="contact-link">
+            <img src="/ASSETS/github_icon.png" alt="GitHub"> GitHub
+          </a>
+          <a href="https://www.instagram.com/brandkeytrouble/" target="_blank" class="contact-link">
+            <img src="/ASSETS/instagram_icon.png" alt="Instagram"> Instagram
+          </a>
+          <a href="https://platzi.com/p/xbrandon6196x/" target="_blank" class="contact-link">
+            <img src="/ASSETS/platzi_logo_icon.png" alt="Platzi"> Platzi
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        hamburger.addEventListener('click', () => {
-            sidebar.classList.toggle('active');
-        });
-    </script>
+  <!-- MUSIC PLAYER -->
+  <div class="music-player" id="musicPlayer">
+    <div class="music-info">
+      <span class="music-icon">🎵</span>
+      <div class="music-meta">
+        <span class="music-title">When The Music Drops</span>
+        <span class="music-artist">Brand's Pick 🎧</span>
+      </div>
+    </div>
+    <div class="music-controls">
+      <button class="music-ctrl-btn" id="musicPlayBtn" title="Play / Pause">▶</button>
+      <input type="range" id="musicProgress" class="music-progress" value="0" min="0" max="100" step="0.1">
+      <span class="music-time" id="musicTime">0:00</span>
+      <input type="range" id="musicVolume" class="music-volume" value="10" min="0" max="100" title="Volumen">
+      <span style="font-size:0.8em;">🔊</span>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p><span class="i18n" data-es="Diseñado y desarrollado por " data-en="Designed and developed by ">Diseñado y desarrollado por </span><span class="green">Brand Keymolent</span> · 2025</p>
+    <p style="margin-top:6px;"><span class="i18n" data-es="Hecho con ❤️ desde CDMX 🇲🇽" data-en="Made with ❤️ from CDMX 🇲🇽">Hecho con ❤️ desde CDMX 🇲🇽</span></p>
+  </footer>
+
+</div>
+
+<script src="JS/main.js"></script>
 </body>
 </html>
