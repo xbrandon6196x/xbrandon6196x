@@ -1,3 +1,149 @@
+// ── MODAL MONSTERMON ──────────────────────────
+function abrirJuego() {
+  document.getElementById('modal-juego').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  resetearJuego();
+  iniciarMonstermon();
+}
+
+function cerrarJuego(e, forzar = false) {
+  if (!forzar && e && e.target !== document.getElementById('modal-juego')) return;
+  document.getElementById('modal-juego').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') cerrarJuego(null, true);
+});
+
+// ── LÓGICA MONSTERMON ─────────────────────────
+const MM = {
+  mascotas: {
+    'mm-hipodoge':  { nombre: 'Hipodoge',  img: 'mokepons_mokepon_hipodoge_attack.png' },
+    'mm-capipepo':  { nombre: 'Capipepo',  img: 'mokepons_mokepon_capipepo_attack.png' },
+    'mm-ratigueya': { nombre: 'Ratigueya', img: 'mokepons_mokepon_ratigueya_attack.png' },
+  },
+  ataques: ['PIEDRA','TIJERA','PAPEL'],
+  emojis: { PIEDRA:'👊', TIJERA:'✌️', PAPEL:'🤚' },
+  vidasJ: 3, vidasE: 3, ronda: 0, wins: 0, losses: 0, empates: 0,
+  mascotaJ: null, mascotaE: null,
+};
+
+function aleatorio(min, max) { return Math.floor(Math.random() * (max - min + 1) + min); }
+
+function corazonesHTML(vidas) {
+  let h = '';
+  for (let i = 0; i < 3; i++) h += `<span class="mm-corazon ${i >= vidas ? 'perdido' : ''}">❤️</span>`;
+  return h;
+}
+
+function resetearJuego() {
+  MM.vidasJ = 3; MM.vidasE = 3; MM.ronda = 0;
+  MM.wins = 0; MM.losses = 0; MM.empates = 0;
+  MM.mascotaJ = null; MM.mascotaE = null;
+  document.querySelectorAll('input[name="mm-mascota"]').forEach(r => r.checked = false);
+  document.getElementById('mm-historial').innerHTML = '';
+  document.getElementById('mm-flash').textContent = '';
+  document.getElementById('mm-ataqueDisplay').textContent = '🤔';
+  document.getElementById('mm-corazonesJ').innerHTML = '❤️❤️❤️';
+  document.getElementById('mm-corazonesE').innerHTML = '❤️❤️❤️';
+  ['mm-piedra','mm-tijera','mm-papel'].forEach(id => document.getElementById(id).disabled = false);
+  document.getElementById('mm-selecciona-mascota').style.display = 'flex';
+  document.getElementById('mm-batalla').style.display = 'none';
+  document.getElementById('mm-final').style.display = 'none';
+}
+
+function iniciarMonstermon() {
+  document.getElementById('mm-iniciar').onclick = () => {
+    const sel = document.querySelector('input[name="mm-mascota"]:checked');
+    if (!sel) { alert('¡Elige una mascota primero!'); return; }
+
+    MM.mascotaJ = MM.mascotas[sel.id];
+    const claves = Object.keys(MM.mascotas);
+    MM.mascotaE = MM.mascotas[claves[aleatorio(0, 2)]];
+
+    document.getElementById('mm-spriteJ').src = MM.mascotaJ.img;
+    document.getElementById('mm-nombreJ').textContent = MM.mascotaJ.nombre;
+    document.getElementById('mm-spriteE').src = MM.mascotaE.img;
+    document.getElementById('mm-nombreE').textContent = MM.mascotaE.nombre;
+
+    document.getElementById('mm-selecciona-mascota').style.display = 'none';
+    document.getElementById('mm-batalla').style.display = 'flex';
+  };
+
+  ['piedra','tijera','papel'].forEach(a => {
+    document.getElementById('mm-' + a).onclick = () => mmAtacar(a.toUpperCase());
+  });
+
+  document.getElementById('mm-reiniciar').onclick = () => {
+    resetearJuego();
+  };
+}
+
+function mmAtacar(ataque) {
+  const ataqueE = MM.ataques[aleatorio(0, 2)];
+  MM.ronda++;
+
+  document.getElementById('mm-ataqueDisplay').textContent = MM.emojis[ataqueE] + ' ' + ataqueE;
+
+  let res;
+  if (ataque === ataqueE) res = 'EMPATE';
+  else if (
+    ataque==='PIEDRA'&&ataqueE==='TIJERA' ||
+    ataque==='TIJERA'&&ataqueE==='PAPEL'  ||
+    ataque==='PAPEL' &&ataqueE==='PIEDRA'
+  ) res = 'GANASTE';
+  else res = 'PERDISTE';
+
+  const sJ = document.getElementById('mm-spriteJ');
+  const sE = document.getElementById('mm-spriteE');
+
+  if (res === 'GANASTE') {
+    sJ.classList.add('atacando'); sE.classList.add('golpeado');
+    MM.vidasE--; MM.wins++;
+  } else if (res === 'PERDISTE') {
+    sE.classList.add('atacando'); sJ.classList.add('golpeado');
+    MM.vidasJ--; MM.losses++;
+  } else {
+    MM.empates++;
+  }
+  setTimeout(() => { sJ.classList.remove('atacando','golpeado'); sE.classList.remove('atacando','golpeado'); }, 500);
+
+  document.getElementById('mm-corazonesJ').innerHTML = corazonesHTML(MM.vidasJ);
+  document.getElementById('mm-corazonesE').innerHTML = corazonesHTML(MM.vidasE);
+
+  const flash = document.getElementById('mm-flash');
+  flash.textContent = res==='GANASTE' ? '¡GANASTE! 🎉' : res==='PERDISTE' ? '¡PERDISTE! 💀' : '¡EMPATE! 🤝';
+  flash.className = 'mm-flash ' + (res==='GANASTE' ? 'ganaste' : res==='PERDISTE' ? 'perdiste' : 'empate');
+  setTimeout(() => { flash.textContent = ''; flash.className = 'mm-flash'; }, 1500);
+
+  // Historial
+  const wrap = document.getElementById('mm-historial');
+  const item = document.createElement('div');
+  item.className = `mm-historial-item ${res.toLowerCase()}`;
+  item.innerHTML = `
+    <span class="h-ronda">Ronda ${MM.ronda}</span>
+    <span class="h-ataques">${MM.emojis[ataque]} vs ${MM.emojis[ataqueE]}</span>
+    <span class="h-res">${res}</span>`;
+  wrap.prepend(item);
+
+  if (MM.vidasJ === 0 || MM.vidasE === 0) {
+    ['mm-piedra','mm-tijera','mm-papel'].forEach(id => document.getElementById(id).disabled = true);
+    setTimeout(() => {
+      document.getElementById('mm-batalla').style.display = 'none';
+      const pf = document.getElementById('mm-final');
+      pf.style.display = 'flex';
+      const gano = MM.vidasE === 0;
+      document.getElementById('mm-trofeo').textContent = gano ? '🏆' : '💀';
+      document.getElementById('mm-msg-final').textContent = gano ? '¡GANASTE, CAMPEÓN!' : '¡PERDISTE! ¡Mejor suerte!';
+      document.getElementById('mm-stat-r').textContent = MM.ronda;
+      document.getElementById('mm-stat-w').textContent = MM.wins;
+      document.getElementById('mm-stat-l').textContent = MM.losses;
+      document.getElementById('mm-stat-e').textContent = MM.empates;
+    }, 700);
+  }
+}
+
 // ── HAMBURGER MENU ────────────────────────────
 const hamburger = document.getElementById('hamburger');
 const sidebar   = document.getElementById('sidebar');
