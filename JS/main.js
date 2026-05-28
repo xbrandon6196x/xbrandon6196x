@@ -332,6 +332,7 @@ if (snakeCanvas && !reduceMotion.matches) {
   let snake = [];
   let direction = directions[0];
   let target = { x: 0, y: 0 };
+  let targetPulse = 1;
   let cols = 0;
   let rows = 0;
   let grid = 18;
@@ -369,10 +370,19 @@ if (snakeCanvas && !reduceMotion.matches) {
   }
 
   function chooseTarget() {
-    target = {
-      x: Math.floor(Math.random() * cols),
-      y: Math.floor(Math.random() * rows),
-    };
+    const occupied = new Set(snake.map(part => `${part.x},${part.y}`));
+    let nextTarget = target;
+
+    for (let attempts = 0; attempts < 60; attempts++) {
+      nextTarget = {
+        x: Math.floor(Math.random() * cols),
+        y: Math.floor(Math.random() * rows),
+      };
+      if (!occupied.has(`${nextTarget.x},${nextTarget.y}`)) break;
+    }
+
+    target = nextTarget;
+    targetPulse = 1;
   }
 
   function nextCell(from, move) {
@@ -417,13 +427,25 @@ if (snakeCanvas && !reduceMotion.matches) {
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     const bodyColor = isDark ? 'rgba(120, 255, 142,' : 'rgba(0, 198, 1,';
     const headColor = isDark ? 'rgba(170, 255, 185, 0.45)' : 'rgba(0, 153, 0, 0.38)';
-    const glowColor = isDark ? 'rgba(120, 255, 142, 0.08)' : 'rgba(0, 198, 1, 0.07)';
+    const targetColor = isDark ? 'rgba(155, 255, 170, 0.48)' : 'rgba(0, 198, 1, 0.34)';
+    const targetCoreColor = isDark ? 'rgba(230, 255, 235, 0.78)' : 'rgba(255, 255, 255, 0.82)';
+    const targetGlowColor = isDark ? 'rgba(120, 255, 142, 0.14)' : 'rgba(0, 198, 1, 0.12)';
     const gap = Math.max(3, Math.floor(grid * 0.18));
     const size = grid - gap;
 
-    ctx.fillStyle = glowColor;
-    ctx.fillRect(target.x * grid + grid * 0.35, target.y * grid, grid * 0.3, grid);
-    ctx.fillRect(target.x * grid, target.y * grid + grid * 0.35, grid, grid * 0.3);
+    const pulseSize = grid * (1.35 + targetPulse * 0.45);
+    const targetX = target.x * grid;
+    const targetY = target.y * grid;
+    ctx.fillStyle = targetGlowColor;
+    ctx.fillRect(targetX + (grid - pulseSize) / 2, targetY + grid * 0.34, pulseSize, grid * 0.32);
+    ctx.fillRect(targetX + grid * 0.34, targetY + (grid - pulseSize) / 2, grid * 0.32, pulseSize);
+
+    ctx.fillStyle = targetColor;
+    ctx.fillRect(targetX + grid * 0.36, targetY + grid * 0.04, grid * 0.28, grid * 0.92);
+    ctx.fillRect(targetX + grid * 0.04, targetY + grid * 0.36, grid * 0.92, grid * 0.28);
+    ctx.fillStyle = targetCoreColor;
+    ctx.fillRect(targetX + grid * 0.4, targetY + grid * 0.4, grid * 0.2, grid * 0.2);
+    targetPulse = Math.max(0, targetPulse - 0.04);
 
     snake.forEach((part, index) => {
       const opacity = Math.max(0.12, 0.32 - index * 0.006);

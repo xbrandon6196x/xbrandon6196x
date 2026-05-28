@@ -62,20 +62,19 @@
         <span class="i18n" data-es="Contacto" data-en="Contact">Contacto</span>
       </a>
     </li>
-    <li>
-      <button type="button" class="sidebar-logos sidebar-action" id="langToggle" aria-label="Cambiar idioma a inglés">
-        <img src="translate_icon.png" alt="">
-        <span id="langLabel">English</span>
-      </button>
-    </li>
-    <li>
-      <button type="button" class="sidebar-logos sidebar-action" id="themeToggle" aria-label="Activar modo oscuro">
-        <span id="themeIcon" style="font-size:1.6em;">🌙</span>
-        <span id="themeLabel" class="i18n" data-es="Oscuro" data-en="Dark">Oscuro</span>
-      </button>
-    </li>
   </ul>
 </nav>
+
+<div class="quick-actions" role="group" aria-label="Preferencias">
+  <button type="button" class="quick-action" id="langToggle" aria-label="Cambiar idioma a inglés">
+    <img src="translate_icon.png" alt="" aria-hidden="true">
+    <span id="langLabel">English</span>
+  </button>
+  <button type="button" class="quick-action" id="themeToggle" aria-label="Activar modo oscuro">
+    <span id="themeIcon" aria-hidden="true">🌙</span>
+    <span id="themeLabel" class="i18n" data-es="Oscuro" data-en="Dark">Oscuro</span>
+  </button>
+</div>
 
 <!-- ── PAGE ── -->
 <div class="page-content">
