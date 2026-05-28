@@ -1,26 +1,31 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es" data-lang="es" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portafolio web de Brand Keymolent, estudiante de Ingeniería de Software y Redes con experiencia en telecomunicaciones, soporte técnico y desarrollo Front-End.">
+  <meta name="theme-color" content="#00c601">
   <title>Brand Keymolent | Portafolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@300;400;600;700;900&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<canvas class="ambient-snake" id="ambientSnake" aria-hidden="true"></canvas>
 
 <!-- Audio -->
-<audio id="bg-music" loop>
+<audio id="bg-music" loop preload="metadata">
   <source src="when-the-music-drops.mp3" type="audio/mp3">
 </audio>
 
 <!-- Hamburger -->
-<button class="hamburger" id="hamburger">
-  <span></span><span></span><span></span>
+<button class="hamburger" id="hamburger" type="button" aria-label="Abrir menú" aria-controls="sidebar" aria-expanded="false">
+  <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
 </button>
 
 <!-- Sidebar -->
-<nav class="sidebar" id="sidebar">
+<nav class="sidebar" id="sidebar" aria-label="Navegación principal">
   <ul>
     <li>
       <a href="#hero" class="bk-icon">
@@ -57,20 +62,19 @@
         <span class="i18n" data-es="Contacto" data-en="Contact">Contacto</span>
       </a>
     </li>
-    <li>
-      <a href="javascript:void(0)" class="sidebar-logos" id="langToggle">
-        <img src="translate_icon.png" alt="">
-        <span id="langLabel">English</span>
-      </a>
-    </li>
-    <li>
-      <a href="javascript:void(0)" class="sidebar-logos" id="themeToggle">
-        <span id="themeIcon" style="font-size:1.6em;">🌙</span>
-        <span id="themeLabel" class="i18n" data-es="Oscuro" data-en="Dark">Oscuro</span>
-      </a>
-    </li>
   </ul>
 </nav>
+
+<div class="quick-actions" role="group" aria-label="Preferencias">
+  <button type="button" class="quick-action" id="langToggle" aria-label="Cambiar idioma a inglés">
+    <img src="translate_icon.png" alt="" aria-hidden="true">
+    <span id="langLabel">English</span>
+  </button>
+  <button type="button" class="quick-action" id="themeToggle" aria-label="Activar modo oscuro">
+    <span id="themeIcon" aria-hidden="true">🌙</span>
+    <span id="themeLabel" class="i18n" data-es="Oscuro" data-en="Dark">Oscuro</span>
+  </button>
+</div>
 
 <!-- ── PAGE ── -->
 <div class="page-content">
@@ -87,14 +91,14 @@
         <a href="#contact" class="btn-outline i18n" data-es="Contáctame" data-en="Contact me">Contáctame</a>
       </div>
       <div class="social-icons">
-        <a href="https://mx.linkedin.com/in/brandonkeymolent" target="_blank"><img src="linkedin_icon.png" alt="LinkedIn"></a>
-        <a href="https://github.com/xbrandon6196x" target="_blank"><img src="github_icon.png" alt="GitHub"></a>
-        <a href="https://www.instagram.com/brandkeytrouble/" target="_blank"><img src="instagram_icon.png" alt="Instagram"></a>
-        <a href="https://platzi.com/p/xbrandon6196x/" target="_blank"><img src="platzi_logo_icon.png" alt="Platzi"></a>
+        <a href="https://mx.linkedin.com/in/brandonkeymolent" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de Brand Keymolent"><img src="linkedin_icon.png" alt="LinkedIn"></a>
+        <a href="https://github.com/xbrandon6196x" target="_blank" rel="noopener noreferrer" aria-label="GitHub de Brand Keymolent"><img src="github_icon.png" alt="GitHub"></a>
+        <a href="https://www.instagram.com/brandkeytrouble/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Brand Keymolent"><img src="instagram_icon.png" alt="Instagram"></a>
+        <a href="https://platzi.com/p/xbrandon6196x/" target="_blank" rel="noopener noreferrer" aria-label="Perfil de Platzi de Brand Keymolent"><img src="platzi_logo_icon.png" alt="Platzi"></a>
       </div>
     </div>
     <div class="hero-image">
-      <img src="brand_perfil_icon.png" alt="Brand Keymolent" onerror="this.style.display='none'">
+      <img src="brand_perfil_icon.png" alt="Brand Keymolent" fetchpriority="high" decoding="async" onerror="this.style.display='none'">
     </div>
   </section>
 
@@ -105,13 +109,13 @@
     <h2><span class="i18n" data-es="¿Qué quieres saber " data-en="What do you want to know ">¿Qué quieres saber </span><span class="green i18n" data-es="de mí?" data-en="about me?">de mí?</span></h2>
     <p class="i18n" data-es="Elige lo que más te interese" data-en="Choose what interests you most">Elige lo que más te interese</p>
     <div class="choice-buttons">
-      <button class="choice-btn active" id="btn-personal" onclick="showPanel('personal', event)">
+      <button class="choice-btn active" id="btn-personal" type="button" aria-controls="panel-personal" aria-selected="true" onclick="showPanel('personal', event)">
         🙋 <span class="i18n" data-es="Personalmente" data-en="Personally">Personalmente</span>
       </button>
-      <button class="choice-btn" id="btn-work" onclick="showPanel('work', event)">
+      <button class="choice-btn" id="btn-work" type="button" aria-controls="panel-work" aria-selected="false" onclick="showPanel('work', event)">
         💼 <span class="i18n" data-es="Laboralmente" data-en="Professionally">Laboralmente</span>
       </button>
-      <button class="choice-btn" id="btn-both" onclick="showPanel('both', event)">
+      <button class="choice-btn" id="btn-both" type="button" aria-controls="panel-both" aria-selected="false" onclick="showPanel('both', event)">
         ✨ <span class="i18n" data-es="Ambos" data-en="Both">Ambos</span>
       </button>
     </div>
@@ -126,7 +130,7 @@
       <p><span class="i18n" data-es="Disfruto mucho los videojuegos en casa mientras escucho música de " data-en="I really enjoy video games at home while listening to music by ">Disfruto mucho los videojuegos en casa mientras escucho música de </span><strong>Portugal. The Man</strong>, <strong>Rels B</strong><span class="i18n" data-es=", o lo que encuentre navegando. Y de hecho... ¡ahora mismo estás escuchando mi canción favorita del momento! 🎵" data-en=", or whatever I find while browsing. And actually... you're listening to my favorite song right now! 🎵">, o lo que encuentre navegando. Y de hecho... ¡ahora mismo estás escuchando mi canción favorita del momento! 🎵</span></p>
     </div>
     <div class="about-panel-img">
-      <img src="fotos_collage.png" alt="Collage de fotos">
+      <img src="fotos_collage.png" alt="Collage de fotos" loading="lazy" decoding="async">
     </div>
   </div>
 
@@ -142,14 +146,14 @@
         <div class="cv-viewer-header">
           <span>CV</span>
           <div class="cv-actions">
-            <a href="CV_Brandon_Keymolent_FINAL.pdf" target="_blank" class="cv-action i18n" data-es="Abrir" data-en="Open">Abrir</a>
+            <a href="CV_Brandon_Keymolent_FINAL.pdf" target="_blank" rel="noopener noreferrer" class="cv-action i18n" data-es="Abrir" data-en="Open">Abrir</a>
             <a href="CV_Brandon_Keymolent_FINAL.pdf" download class="cv-action i18n" data-es="Descargar" data-en="Download">Descargar</a>
           </div>
         </div>
         <object data="CV_Brandon_Keymolent_FINAL.pdf#view=FitH" type="application/pdf" class="cv-frame">
           <p>
             <span class="i18n" data-es="Tu navegador no puede mostrar el PDF aqui." data-en="Your browser cannot display the PDF here.">Tu navegador no puede mostrar el PDF aqui.</span>
-            <a href="CV_Brandon_Keymolent_FINAL.pdf" target="_blank" class="i18n" data-es="Abrir CV" data-en="Open CV">Abrir CV</a>
+            <a href="CV_Brandon_Keymolent_FINAL.pdf" target="_blank" rel="noopener noreferrer" class="i18n" data-es="Abrir CV" data-en="Open CV">Abrir CV</a>
           </p>
         </object>
       </div>
@@ -164,7 +168,7 @@
       <p class="i18n" data-es="Mi objetivo es unir mi pasión por la tecnología, el diseño, el servicio y el análisis para crear soluciones digitales útiles, claras y pensadas para las personas. ¡Bienvenido a mi portafolio! 🚀" data-en="My goal is to bring together my passion for technology, design, service and analysis to create useful, clear and people-centered digital solutions. Welcome to my portfolio! 🚀">Mi objetivo es unir mi pasión por la tecnología, el diseño, el servicio y el análisis para crear soluciones digitales útiles, claras y pensadas para las personas. ¡Bienvenido a mi portafolio! 🚀</p>
     </div>
     <div class="about-panel-img">
-      <img src="fotos_collage.png" alt="Collage">
+      <img src="fotos_collage.png" alt="Collage" loading="lazy" decoding="async">
     </div>
   </div>
 
@@ -183,7 +187,7 @@
           <div class="project-card-top">
             <span class="project-emoji">🌐</span>
             <div class="project-card-links">
-              <a href="https://github.com/xbrandon6196x/Portafolio_WEB" target="_blank" class="project-link" title="GitHub">
+              <a href="https://github.com/xbrandon6196x/Portafolio_WEB" target="_blank" rel="noopener noreferrer" class="project-link" title="GitHub">
                 <img src="github_icon.png" alt="GitHub">
               </a>
             </div>
@@ -203,7 +207,7 @@
           <div class="project-card-top">
             <span class="project-emoji">👾</span>
             <div class="project-card-links">
-              <a href="https://github.com/xbrandon6196x/Monstermon" target="_blank" class="project-link" title="GitHub">
+              <a href="https://github.com/xbrandon6196x/Monstermon" target="_blank" rel="noopener noreferrer" class="project-link" title="GitHub">
                 <img src="github_icon.png" alt="GitHub">
               </a>
             </div>
@@ -213,7 +217,7 @@
           <div class="project-tags">
             <span class="project-tag">HTML</span><span class="project-tag">CSS</span><span class="project-tag">JS</span><span class="project-tag">🎮 <span class="i18n" data-es="Juego" data-en="Game">Juego</span></span>
           </div>
-          <button class="btn-play-game" onclick="abrirJuego()" >
+          <button class="btn-play-game" type="button" onclick="abrirJuego()" >
             🕹️ <span class="i18n" data-es="¡Jugar ahora!" data-en="Play now!">¡Jugar ahora!</span>
           </button>
         </div>
@@ -226,7 +230,7 @@
           <div class="project-card-top">
             <span class="project-emoji">✨</span>
             <div class="project-card-links">
-              <a href="http://figou.mx" target="_blank" class="project-link project-link-web" title="Ver sitio">🔗</a>
+              <a href="http://figou.mx" target="_blank" rel="noopener noreferrer" class="project-link project-link-web" title="Ver sitio">🔗</a>
             </div>
           </div>
           <h3>figou.mx</h3>
@@ -234,7 +238,7 @@
           <div class="project-tags">
             <span class="project-tag">Web</span><span class="project-tag">🚀 <span class="i18n" data-es="En vivo" data-en="Live">En vivo</span></span>
           </div>
-          <a href="http://figou.mx" target="_blank" class="btn-visit-site">
+          <a href="http://figou.mx" target="_blank" rel="noopener noreferrer" class="btn-visit-site">
             🌐 <span class="i18n" data-es="Visitar sitio" data-en="Visit site">Visitar sitio</span>
           </a>
         </div>
@@ -247,10 +251,10 @@
           <div class="project-card-top">
             <span class="project-emoji">₿</span>
             <div class="project-card-links">
-              <a href="https://github.com/xbrandon6196x/batatabit" target="_blank" class="project-link" title="GitHub">
+              <a href="https://github.com/xbrandon6196x/batatabit" target="_blank" rel="noopener noreferrer" class="project-link" title="GitHub">
                 <img src="github_icon.png" alt="GitHub">
               </a>
-              <a href="https://batatabit-site.netlify.app/" target="_blank" class="project-link project-link-web" title="Ver sitio">🔗</a>
+              <a href="https://batatabit-site.netlify.app/" target="_blank" rel="noopener noreferrer" class="project-link project-link-web" title="Ver sitio">🔗</a>
             </div>
           </div>
           <h3>Batatabit</h3>
@@ -258,7 +262,7 @@
           <div class="project-tags">
             <span class="project-tag">HTML</span><span class="project-tag">CSS</span><span class="project-tag">📱 Mobile First</span>
           </div>
-          <a href="https://batatabit-site.netlify.app/" target="_blank" class="btn-visit-site">
+          <a href="https://batatabit-site.netlify.app/" target="_blank" rel="noopener noreferrer" class="btn-visit-site">
             🌐 <span class="i18n" data-es="Visitar sitio" data-en="Visit site">Visitar sitio</span>
           </a>
         </div>
@@ -298,59 +302,59 @@
       <article class="cert-group">
         <h3 class="i18n" data-es="Desarrollo y programación" data-en="Development and programming">Desarrollo y programación</h3>
         <ul>
-          <li><a href="certificados/diploma-java.pdf" target="_blank">Curso de Java</a></li>
-          <li><a href="certificados/diploma-java-sql.pdf" target="_blank">Curso de Java SE: SQL y Bases de Datos</a></li>
-          <li><a href="certificados/diploma-testing-java.pdf" target="_blank">Curso Básico de Testing en Java</a></li>
-          <li><a href="certificados/diploma-basico-programacion.pdf" target="_blank">Curso Básico de Programación</a></li>
-          <li><a href="certificados/diploma-ingenieria2017.pdf" target="_blank">Fundamentos de Ingeniería de Software</a></li>
-          <li><a href="certificados/diploma-pensamiento-logico-2020.pdf" target="_blank">Curso Básico de Algoritmos y Pensamiento Lógico</a></li>
-          <li><a href="certificados/diploma-pensamiento-logico-lenguajes-2022.pdf" target="_blank">Curso de Pensamiento Lógico: Lenguajes de Programación</a></li>
-          <li><a href="certificados/diploma-pensamiento-logico-estructuras-2022.pdf" target="_blank">Curso de Pensamiento Lógico: Manejo de Datos, Estructuras y Funciones</a></li>
-          <li><a href="certificados/diploma-pensamiento-logico-2022.pdf" target="_blank">Curso de Pensamiento Lógico: Algoritmos y Diagramas de Flujo</a></li>
+          <li><a href="certificados/diploma-java.pdf" target="_blank" rel="noopener noreferrer">Curso de Java</a></li>
+          <li><a href="certificados/diploma-java-sql.pdf" target="_blank" rel="noopener noreferrer">Curso de Java SE: SQL y Bases de Datos</a></li>
+          <li><a href="certificados/diploma-testing-java.pdf" target="_blank" rel="noopener noreferrer">Curso Básico de Testing en Java</a></li>
+          <li><a href="certificados/diploma-basico-programacion.pdf" target="_blank" rel="noopener noreferrer">Curso Básico de Programación</a></li>
+          <li><a href="certificados/diploma-ingenieria2017.pdf" target="_blank" rel="noopener noreferrer">Fundamentos de Ingeniería de Software</a></li>
+          <li><a href="certificados/diploma-pensamiento-logico-2020.pdf" target="_blank" rel="noopener noreferrer">Curso Básico de Algoritmos y Pensamiento Lógico</a></li>
+          <li><a href="certificados/diploma-pensamiento-logico-lenguajes-2022.pdf" target="_blank" rel="noopener noreferrer">Curso de Pensamiento Lógico: Lenguajes de Programación</a></li>
+          <li><a href="certificados/diploma-pensamiento-logico-estructuras-2022.pdf" target="_blank" rel="noopener noreferrer">Curso de Pensamiento Lógico: Manejo de Datos, Estructuras y Funciones</a></li>
+          <li><a href="certificados/diploma-pensamiento-logico-2022.pdf" target="_blank" rel="noopener noreferrer">Curso de Pensamiento Lógico: Algoritmos y Diagramas de Flujo</a></li>
         </ul>
       </article>
       <article class="cert-group">
         <h3>Front-End</h3>
         <ul>
-          <li><a href="certificados/diploma-html-practico.pdf" target="_blank">Curso Práctico de HTML y CSS</a></li>
-          <li><a href="certificados/diploma-html-css-2020.pdf" target="_blank">Curso Definitivo de HTML y CSS</a></li>
-          <li><a href="certificados/diploma-frontend-developer-practico.pdf" target="_blank">Curso Práctico de Frontend Developer</a></li>
-          <li><a href="certificados/diploma-frontend-developer.pdf" target="_blank">Curso de Frontend Developer</a></li>
-          <li><a href="certificados/diploma-mobile-first-2020.pdf" target="_blank">Curso de Responsive Design: Maquetación Mobile First</a></li>
-          <li><a href="certificados/diploma-backend.pdf" target="_blank">Curso de Introducción al Desarrollo Backend</a></li>
-          <li><a href="certificados/diploma-desarrollo-moderno-codestream.pdf" target="_blank">Curso de Flujo de Desarrollo Moderno CodeStream</a></li>
+          <li><a href="certificados/diploma-html-practico.pdf" target="_blank" rel="noopener noreferrer">Curso Práctico de HTML y CSS</a></li>
+          <li><a href="certificados/diploma-html-css-2020.pdf" target="_blank" rel="noopener noreferrer">Curso Definitivo de HTML y CSS</a></li>
+          <li><a href="certificados/diploma-frontend-developer-practico.pdf" target="_blank" rel="noopener noreferrer">Curso Práctico de Frontend Developer</a></li>
+          <li><a href="certificados/diploma-frontend-developer.pdf" target="_blank" rel="noopener noreferrer">Curso de Frontend Developer</a></li>
+          <li><a href="certificados/diploma-mobile-first-2020.pdf" target="_blank" rel="noopener noreferrer">Curso de Responsive Design: Maquetación Mobile First</a></li>
+          <li><a href="certificados/diploma-backend.pdf" target="_blank" rel="noopener noreferrer">Curso de Introducción al Desarrollo Backend</a></li>
+          <li><a href="certificados/diploma-desarrollo-moderno-codestream.pdf" target="_blank" rel="noopener noreferrer">Curso de Flujo de Desarrollo Moderno CodeStream</a></li>
         </ul>
       </article>
       <article class="cert-group">
         <h3 class="i18n" data-es="Herramientas y sistemas" data-en="Tools and systems">Herramientas y sistemas</h3>
         <ul>
-          <li><a href="certificados/diploma-git-github.pdf" target="_blank">Curso Profesional de Git y GitHub</a></li>
-          <li><a href="certificados/diploma-terminal-21.pdf" target="_blank">Curso de Introducción a la Terminal y Línea de Comandos</a></li>
-          <li><a href="certificados/diploma-prework-windows.pdf" target="_blank">Curso de Prework: Configuración de Entorno de Desarrollo en Windows</a></li>
-          <li><a href="certificados/diploma-prework-macos.pdf" target="_blank">Curso de Configuración de Entorno de Desarrollo en macOS</a></li>
-          <li><a href="certificados/diploma-computacion-basica.pdf" target="_blank">Curso Básico de Computadores e Informática</a></li>
-          <li><a href="certificados/diploma-redes.pdf" target="_blank">Curso de Redes Informáticas de Internet</a></li>
-          <li><a href="certificados/diploma-intro-historia-internet.pdf" target="_blank">Curso de Introducción a la Web: Historia y Funcionamiento de Internet</a></li>
+          <li><a href="certificados/diploma-git-github.pdf" target="_blank" rel="noopener noreferrer">Curso Profesional de Git y GitHub</a></li>
+          <li><a href="certificados/diploma-terminal-21.pdf" target="_blank" rel="noopener noreferrer">Curso de Introducción a la Terminal y Línea de Comandos</a></li>
+          <li><a href="certificados/diploma-prework-windows.pdf" target="_blank" rel="noopener noreferrer">Curso de Prework: Configuración de Entorno de Desarrollo en Windows</a></li>
+          <li><a href="certificados/diploma-prework-macos.pdf" target="_blank" rel="noopener noreferrer">Curso de Configuración de Entorno de Desarrollo en macOS</a></li>
+          <li><a href="certificados/diploma-computacion-basica.pdf" target="_blank" rel="noopener noreferrer">Curso Básico de Computadores e Informática</a></li>
+          <li><a href="certificados/diploma-redes.pdf" target="_blank" rel="noopener noreferrer">Curso de Redes Informáticas de Internet</a></li>
+          <li><a href="certificados/diploma-intro-historia-internet.pdf" target="_blank" rel="noopener noreferrer">Curso de Introducción a la Web: Historia y Funcionamiento de Internet</a></li>
         </ul>
       </article>
       <article class="cert-group">
         <h3 class="i18n" data-es="Análisis y negocios" data-en="Analysis and business">Análisis y negocios</h3>
         <ul>
-          <li><a href="certificados/constancia_brandon_keymolent_olvera.pdf" target="_blank">Rescate Financiero Empresarial</a></li>
+          <li><a href="certificados/constancia_brandon_keymolent_olvera.pdf" target="_blank" rel="noopener noreferrer">Rescate Financiero Empresarial</a></li>
         </ul>
       </article>
       <article class="cert-group">
         <h3 class="i18n" data-es="Comunicación y crecimiento" data-en="Communication and growth">Comunicación y crecimiento</h3>
         <ul>
-          <li><a href="certificados/diploma-comunicacion-equipos.pdf" target="_blank">Curso de Comunicación Efectiva para Equipos de Trabajo</a></li>
-          <li><a href="certificados/diploma-comunicacion-asertiva-2021.pdf" target="_blank">Curso de Comunicación Asertiva para la Vida Personal y Profesional</a></li>
-          <li><a href="certificados/diploma-dar-feedback.pdf" target="_blank">Audiocurso de Cómo Dar Feedback</a></li>
-          <li><a href="certificados/diploma-recibir-feedback.pdf" target="_blank">Audiocurso de Cómo Recibir Feedback</a></li>
-          <li><a href="certificados/diploma-neurociencia-feedback.pdf" target="_blank">Audiocurso sobre la Neurociencia del Feedback</a></li>
-          <li><a href="certificados/diploma-herramientas-ie.pdf" target="_blank">Curso Herramientas Prácticas para la Inteligencia Emocional</a></li>
-          <li><a href="certificados/diploma-inteligencia-emocional.pdf" target="_blank">Curso de Inteligencia Emocional</a></li>
-          <li><a href="certificados/diploma-desarrollar-empatia.pdf" target="_blank">Curso para Desarrollar la Empatía</a></li>
-          <li><a href="certificados/diploma-ingles-principiantes-2020.pdf" target="_blank">Cursos de Inglés</a></li>
+          <li><a href="certificados/diploma-comunicacion-equipos.pdf" target="_blank" rel="noopener noreferrer">Curso de Comunicación Efectiva para Equipos de Trabajo</a></li>
+          <li><a href="certificados/diploma-comunicacion-asertiva-2021.pdf" target="_blank" rel="noopener noreferrer">Curso de Comunicación Asertiva para la Vida Personal y Profesional</a></li>
+          <li><a href="certificados/diploma-dar-feedback.pdf" target="_blank" rel="noopener noreferrer">Audiocurso de Cómo Dar Feedback</a></li>
+          <li><a href="certificados/diploma-recibir-feedback.pdf" target="_blank" rel="noopener noreferrer">Audiocurso de Cómo Recibir Feedback</a></li>
+          <li><a href="certificados/diploma-neurociencia-feedback.pdf" target="_blank" rel="noopener noreferrer">Audiocurso sobre la Neurociencia del Feedback</a></li>
+          <li><a href="certificados/diploma-herramientas-ie.pdf" target="_blank" rel="noopener noreferrer">Curso Herramientas Prácticas para la Inteligencia Emocional</a></li>
+          <li><a href="certificados/diploma-inteligencia-emocional.pdf" target="_blank" rel="noopener noreferrer">Curso de Inteligencia Emocional</a></li>
+          <li><a href="certificados/diploma-desarrollar-empatia.pdf" target="_blank" rel="noopener noreferrer">Curso para Desarrollar la Empatía</a></li>
+          <li><a href="certificados/diploma-ingles-principiantes-2020.pdf" target="_blank" rel="noopener noreferrer">Cursos de Inglés</a></li>
         </ul>
       </article>
     </div>
@@ -367,16 +371,16 @@
           <a href="mailto:contacto_brandonkeymolent@gmail.com" class="contact-link">
             <span style="font-size:1.5em;">✉️</span> contacto_brandonkeymolent@gmail.com
           </a>
-          <a href="https://mx.linkedin.com/in/brandonkeymolent" target="_blank" class="contact-link">
+          <a href="https://mx.linkedin.com/in/brandonkeymolent" target="_blank" rel="noopener noreferrer" class="contact-link">
             <img src="linkedin_icon.png" alt="LinkedIn"> LinkedIn
           </a>
-          <a href="https://github.com/xbrandon6196x" target="_blank" class="contact-link">
+          <a href="https://github.com/xbrandon6196x" target="_blank" rel="noopener noreferrer" class="contact-link">
             <img src="github_icon.png" alt="GitHub"> GitHub
           </a>
-          <a href="https://www.instagram.com/brandkeytrouble/" target="_blank" class="contact-link">
+          <a href="https://www.instagram.com/brandkeytrouble/" target="_blank" rel="noopener noreferrer" class="contact-link">
             <img src="instagram_icon.png" alt="Instagram"> Instagram
           </a>
-          <a href="https://platzi.com/p/xbrandon6196x/" target="_blank" class="contact-link">
+          <a href="https://platzi.com/p/xbrandon6196x/" target="_blank" rel="noopener noreferrer" class="contact-link">
             <img src="platzi_logo_icon.png" alt="Platzi"> Platzi
           </a>
         </div>
@@ -394,10 +398,10 @@
       </div>
     </div>
     <div class="music-controls">
-      <button class="music-ctrl-btn" id="musicPlayBtn" title="Play / Pause">▶</button>
-      <input type="range" id="musicProgress" class="music-progress" value="0" min="0" max="100" step="0.1">
+      <button class="music-ctrl-btn" id="musicPlayBtn" type="button" title="Play / Pause" aria-label="Reproducir música">▶</button>
+      <input type="range" id="musicProgress" class="music-progress" value="0" min="0" max="100" step="0.1" aria-label="Progreso de la canción">
       <span class="music-time" id="musicTime">0:00</span>
-      <input type="range" id="musicVolume" class="music-volume" value="10" min="0" max="100" title="Volumen">
+      <input type="range" id="musicVolume" class="music-volume" value="10" min="0" max="100" title="Volumen" aria-label="Volumen de la música">
       <span style="font-size:0.8em;">🔊</span>
     </div>
   </div>
@@ -411,34 +415,34 @@
 </div>
 
 <!-- MODAL MONSTERMON -->
-<div id="modal-juego" class="modal-overlay" onclick="cerrarJuego(event)">
+<div id="modal-juego" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="mm-title" aria-hidden="true" onclick="cerrarJuego(event)">
   <div class="modal-box">
-    <button class="modal-close" onclick="cerrarJuego(null, true)">✕</button>
+    <button class="modal-close" type="button" aria-label="Cerrar juego" onclick="cerrarJuego(null, true)">✕</button>
 
     <div class="juego-contenedor" id="juego-contenedor">
 
       <!-- SELECCIÓN DE MASCOTA -->
       <section id="mm-selecciona-mascota">
-        <h1 class="mm-titulo">MONSTERMON!</h1>
+        <h1 class="mm-titulo" id="mm-title">MONSTERMON!</h1>
         <h2 class="mm-subtitulo">Elige tu monstruo</h2>
         <div class="mm-tarjetas">
           <input type="radio" name="mm-mascota" id="mm-hipodoge">
           <label class="mm-tarjeta" for="mm-hipodoge">
             <p>Hipodoge</p>
-            <img src="mokepons_mokepon_hipodoge_attack.png" alt="Hipodoge">
+            <img src="mokepons_mokepon_hipodoge_attack.png" alt="Hipodoge" loading="lazy" decoding="async">
           </label>
           <input type="radio" name="mm-mascota" id="mm-capipepo">
           <label class="mm-tarjeta" for="mm-capipepo">
             <p>Capipepo</p>
-            <img src="mokepons_mokepon_capipepo_attack.png" alt="Capipepo">
+            <img src="mokepons_mokepon_capipepo_attack.png" alt="Capipepo" loading="lazy" decoding="async">
           </label>
           <input type="radio" name="mm-mascota" id="mm-ratigueya">
           <label class="mm-tarjeta" for="mm-ratigueya">
             <p>Ratigueya</p>
-            <img src="mokepons_mokepon_ratigueya_attack.png" alt="Ratigueya">
+            <img src="mokepons_mokepon_ratigueya_attack.png" alt="Ratigueya" loading="lazy" decoding="async">
           </label>
         </div>
-        <button class="mm-btn" id="mm-iniciar">¡A COMBATIR!</button>
+        <button class="mm-btn" id="mm-iniciar" type="button">¡A COMBATIR!</button>
       </section>
 
       <!-- BATALLA -->
@@ -468,9 +472,9 @@
         </div>
         <div class="mm-flash" id="mm-flash"></div>
         <div class="mm-poderes">
-          <button class="mm-btn-poder" id="mm-piedra">👊 Piedra</button>
-          <button class="mm-btn-poder" id="mm-tijera">✌️ Tijera</button>
-          <button class="mm-btn-poder" id="mm-papel">🤚 Papel</button>
+          <button class="mm-btn-poder" id="mm-piedra" type="button">👊 Piedra</button>
+          <button class="mm-btn-poder" id="mm-tijera" type="button">✌️ Tijera</button>
+          <button class="mm-btn-poder" id="mm-papel" type="button">🤚 Papel</button>
         </div>
         <div class="mm-historial" id="mm-historial"></div>
       </section>
@@ -485,7 +489,7 @@
           <p>Derrotas: <span id="mm-stat-l">0</span></p>
           <p>Empates: <span id="mm-stat-e">0</span></p>
         </div>
-        <button class="mm-btn" id="mm-reiniciar">🔄 JUGAR DE NUEVO</button>
+        <button class="mm-btn" id="mm-reiniciar" type="button">🔄 JUGAR DE NUEVO</button>
       </section>
 
     </div>
