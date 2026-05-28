@@ -63,7 +63,8 @@ body {
 .sidebar ul { list-style: none; width: 100%; padding: 10px 0; }
 .sidebar ul li { width: 100%; }
 
-.sidebar ul li a {
+.sidebar ul li a,
+.sidebar ul li button {
   text-decoration: none;
   color: #fff;
   display: flex;
@@ -79,13 +80,37 @@ body {
   border-left: 3px solid transparent;
 }
 
-.sidebar ul li a:hover {
+.sidebar ul li button {
+  width: 100%;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 0;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li button:hover {
   background: rgba(255,255,255,0.15);
   border-left-color: #fff;
 }
 
 .sidebar-logos img { width: 32px; height: 32px; filter: brightness(0) invert(1); }
 .bk-icon img { width: 72px; height: 72px; margin-bottom: 6px; filter: brightness(0) invert(1); }
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--green);
+  outline-offset: 3px;
+}
+
+.sidebar a:focus-visible,
+.sidebar button:focus-visible {
+  outline-color: #fff;
+  background: rgba(255,255,255,0.18);
+}
 
 /* ── HAMBURGER ───────────────────────────── */
 .hamburger {
@@ -634,6 +659,7 @@ section h2 { font-size: 2em; font-weight: 900; margin-bottom: 10px; color: var(-
   backdrop-filter: blur(4px);
 }
 .modal-overlay.open { display: flex; }
+.modal-overlay[aria-hidden="true"] { display: none; }
 
 .modal-box {
   position: relative;
@@ -809,6 +835,15 @@ footer span { color: var(--green); font-weight: 700; }
 /* ── ANIMATIONS ──────────────────────────── */
 @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
 @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
 
 /* ── RESPONSIVE ──────────────────────────── */
 @media (max-width: 900px) {
