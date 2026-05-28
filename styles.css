@@ -652,6 +652,12 @@ section h2 { font-size: 2em; font-weight: 900; margin-bottom: 10px; color: var(-
   box-shadow: 0 8px 22px rgba(79,142,247,0.55);
 }
 
+.btn-visit-site img {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1);
+}
+
 /* ── CONTACT ─────────────────────────────── */
 .contact-wrapper { display: flex; gap: 60px; align-items: flex-start; flex-wrap: wrap; }
 .contact-info { flex: 1; min-width: 240px; }

@@ -339,6 +339,9 @@ if (snakeCanvas && !reduceMotion.matches) {
   let snakeLength = 28;
   let lastStep = 0;
   let snakeFrame = null;
+  let resizeTimer = null;
+  let stuckSteps = 0;
+  let maxSnakeLength = 42;
 
   function setupSnake() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -346,6 +349,7 @@ if (snakeCanvas && !reduceMotion.matches) {
     cols = Math.ceil(window.innerWidth / grid);
     rows = Math.ceil(window.innerHeight / grid);
     snakeLength = Math.min(42, Math.max(18, Math.floor(cols * rows * 0.012)));
+    maxSnakeLength = Math.min(54, Math.max(snakeLength, Math.floor(cols * rows * 0.05)));
 
     snakeCanvas.width = Math.ceil(window.innerWidth * dpr);
     snakeCanvas.height = Math.ceil(window.innerHeight * dpr);
@@ -362,6 +366,8 @@ if (snakeCanvas && !reduceMotion.matches) {
       y: start.y,
     }));
     direction = directions[0];
+    stuckSteps = 0;
+    lastStep = 0;
     chooseTarget();
   }
 
@@ -369,16 +375,30 @@ if (snakeCanvas && !reduceMotion.matches) {
     return (value + max) % max;
   }
 
+  function cellKey(cell) {
+    return `${cell.x},${cell.y}`;
+  }
+
   function chooseTarget() {
     const occupied = new Set(snake.map(part => `${part.x},${part.y}`));
+    const head = snake[0] || { x: 0, y: 0 };
     let nextTarget = target;
+    let bestDistance = -1;
 
-    for (let attempts = 0; attempts < 60; attempts++) {
-      nextTarget = {
+    for (let attempts = 0; attempts < 90; attempts++) {
+      const candidate = {
         x: Math.floor(Math.random() * cols),
         y: Math.floor(Math.random() * rows),
       };
-      if (!occupied.has(`${nextTarget.x},${nextTarget.y}`)) break;
+      const key = cellKey(candidate);
+      const distance = wrappedDistance(head, candidate);
+
+      if (!occupied.has(key) && distance > bestDistance) {
+        nextTarget = candidate;
+        bestDistance = distance;
+      }
+
+      if (bestDistance > Math.max(cols, rows) * 0.45) break;
     }
 
     target = nextTarget;
@@ -402,23 +422,117 @@ if (snakeCanvas && !reduceMotion.matches) {
     return dx + dy;
   }
 
-  function moveSnake() {
+  function findPathToTarget() {
     const head = snake[0];
-    const body = new Set(snake.slice(0, -1).map(part => `${part.x},${part.y}`));
+    const startKey = cellKey(head);
+    const targetKey = cellKey(target);
+    const blocked = new Set(snake.slice(0, -1).map(cellKey));
+    const queue = [head];
+    const visited = new Set([startKey]);
+    const cameFrom = new Map([[startKey, null]]);
+
+    for (let index = 0; index < queue.length; index++) {
+      const current = queue[index];
+      const currentKey = cellKey(current);
+
+      if (currentKey === targetKey) break;
+
+      directions.forEach(move => {
+        if (currentKey === startKey && isOpposite(move, direction)) return;
+
+        const cell = nextCell(current, move);
+        const key = cellKey(cell);
+        if (visited.has(key) || blocked.has(key)) return;
+
+        visited.add(key);
+        cameFrom.set(key, { prev: currentKey, move });
+        queue.push(cell);
+      });
+    }
+
+    if (!cameFrom.has(targetKey)) return null;
+
+    let stepKey = targetKey;
+    let step = cameFrom.get(stepKey);
+
+    while (step && step.prev !== startKey) {
+      stepKey = step.prev;
+      step = cameFrom.get(stepKey);
+    }
+
+    return step ? step.move : null;
+  }
+
+  function bodyClearance(cell) {
+    const body = snake.slice(0, -1);
+    if (!body.length) return cols + rows;
+
+    return body.reduce((best, part) => {
+      return Math.min(best, wrappedDistance(cell, part));
+    }, cols + rows);
+  }
+
+  function chooseSafeMove() {
+    const head = snake[0];
+    const body = new Set(snake.slice(0, -1).map(cellKey));
     const choices = directions
       .filter(move => !isOpposite(move, direction))
-      .map(move => ({
-        move,
-        cell: nextCell(head, move),
-      }))
-      .filter(choice => !body.has(`${choice.cell.x},${choice.cell.y}`))
-      .sort((a, b) => wrappedDistance(a.cell, target) - wrappedDistance(b.cell, target));
+      .map(move => ({ move, cell: nextCell(head, move) }))
+      .filter(choice => !body.has(cellKey(choice.cell)));
 
-    const best = choices[Math.random() < 0.22 ? Math.min(1, choices.length - 1) : 0];
-    if (best) direction = best.move;
+    if (!choices.length) return null;
 
-    snake.unshift(nextCell(head, direction));
-    if (snake[0].x === target.x && snake[0].y === target.y) chooseTarget();
+    return choices.sort((a, b) => {
+      const targetScore = wrappedDistance(a.cell, target) - wrappedDistance(b.cell, target);
+      const clearanceScore = bodyClearance(b.cell) - bodyClearance(a.cell);
+      return targetScore || clearanceScore;
+    })[0].move;
+  }
+
+  function resetSnake() {
+    const start = {
+      x: Math.floor(cols * (0.2 + Math.random() * 0.35)),
+      y: Math.floor(rows * (0.2 + Math.random() * 0.35)),
+    };
+
+    direction = directions[Math.floor(Math.random() * directions.length)];
+    snake = Array.from({ length: snakeLength }, (_, index) => ({
+      x: wrap(start.x - direction.x * index, cols),
+      y: wrap(start.y - direction.y * index, rows),
+    }));
+    stuckSteps = 0;
+    chooseTarget();
+  }
+
+  function moveSnake() {
+    if (!snake.length) resetSnake();
+
+    const head = snake[0];
+    const body = new Set(snake.slice(0, -1).map(cellKey));
+    const plannedMove = findPathToTarget() || chooseSafeMove();
+
+    if (!plannedMove) {
+      stuckSteps++;
+      if (stuckSteps > 2) resetSnake();
+      return;
+    }
+
+    direction = plannedMove;
+    const nextHead = nextCell(head, direction);
+
+    if (body.has(cellKey(nextHead))) {
+      stuckSteps++;
+      if (stuckSteps > 2) resetSnake();
+      return;
+    }
+
+    snake.unshift(nextHead);
+    stuckSteps = 0;
+
+    if (snake[0].x === target.x && snake[0].y === target.y) {
+      snakeLength = Math.min(maxSnakeLength, snakeLength + 1);
+      chooseTarget();
+    }
     while (snake.length > snakeLength) snake.pop();
   }
 
@@ -433,7 +547,8 @@ if (snakeCanvas && !reduceMotion.matches) {
     const gap = Math.max(3, Math.floor(grid * 0.18));
     const size = grid - gap;
 
-    const pulseSize = grid * (1.35 + targetPulse * 0.45);
+    const pulse = (Math.sin(targetPulse) + 1) / 2;
+    const pulseSize = grid * (1.25 + pulse * 0.42);
     const targetX = target.x * grid;
     const targetY = target.y * grid;
     ctx.fillStyle = targetGlowColor;
@@ -445,7 +560,7 @@ if (snakeCanvas && !reduceMotion.matches) {
     ctx.fillRect(targetX + grid * 0.04, targetY + grid * 0.36, grid * 0.92, grid * 0.28);
     ctx.fillStyle = targetCoreColor;
     ctx.fillRect(targetX + grid * 0.4, targetY + grid * 0.4, grid * 0.2, grid * 0.2);
-    targetPulse = Math.max(0, targetPulse - 0.04);
+    targetPulse += 0.14;
 
     snake.forEach((part, index) => {
       const opacity = Math.max(0.12, 0.32 - index * 0.006);
@@ -478,7 +593,10 @@ if (snakeCanvas && !reduceMotion.matches) {
     snakeFrame = requestAnimationFrame(animateSnake);
   }
 
-  window.addEventListener('resize', startSnake);
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(startSnake, 160);
+  });
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) cancelAnimationFrame(snakeFrame);
     else startSnake();
