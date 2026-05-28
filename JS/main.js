@@ -316,6 +316,165 @@ function formatTime(secs) {
 }
 
 
+// ── AMBIENT SNAKE ───────────────────────────
+const snakeCanvas = document.getElementById('ambientSnake');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+if (snakeCanvas && !reduceMotion.matches) {
+  const ctx = snakeCanvas.getContext('2d');
+  const directions = [
+    { x: 1, y: 0 },
+    { x: -1, y: 0 },
+    { x: 0, y: 1 },
+    { x: 0, y: -1 },
+  ];
+
+  let snake = [];
+  let direction = directions[0];
+  let target = { x: 0, y: 0 };
+  let cols = 0;
+  let rows = 0;
+  let grid = 18;
+  let snakeLength = 28;
+  let lastStep = 0;
+  let snakeFrame = null;
+
+  function setupSnake() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    grid = window.innerWidth < 700 ? 16 : 18;
+    cols = Math.ceil(window.innerWidth / grid);
+    rows = Math.ceil(window.innerHeight / grid);
+    snakeLength = Math.min(42, Math.max(18, Math.floor(cols * rows * 0.012)));
+
+    snakeCanvas.width = Math.ceil(window.innerWidth * dpr);
+    snakeCanvas.height = Math.ceil(window.innerHeight * dpr);
+    snakeCanvas.style.width = `${window.innerWidth}px`;
+    snakeCanvas.style.height = `${window.innerHeight}px`;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const start = {
+      x: Math.floor(cols * 0.18),
+      y: Math.floor(rows * 0.28),
+    };
+    snake = Array.from({ length: snakeLength }, (_, index) => ({
+      x: wrap(start.x - index, cols),
+      y: start.y,
+    }));
+    direction = directions[0];
+    chooseTarget();
+  }
+
+  function wrap(value, max) {
+    return (value + max) % max;
+  }
+
+  function chooseTarget() {
+    target = {
+      x: Math.floor(Math.random() * cols),
+      y: Math.floor(Math.random() * rows),
+    };
+  }
+
+  function nextCell(from, move) {
+    return {
+      x: wrap(from.x + move.x, cols),
+      y: wrap(from.y + move.y, rows),
+    };
+  }
+
+  function isOpposite(a, b) {
+    return a.x + b.x === 0 && a.y + b.y === 0;
+  }
+
+  function wrappedDistance(a, b) {
+    const dx = Math.min(Math.abs(a.x - b.x), cols - Math.abs(a.x - b.x));
+    const dy = Math.min(Math.abs(a.y - b.y), rows - Math.abs(a.y - b.y));
+    return dx + dy;
+  }
+
+  function moveSnake() {
+    const head = snake[0];
+    const body = new Set(snake.slice(0, -1).map(part => `${part.x},${part.y}`));
+    const choices = directions
+      .filter(move => !isOpposite(move, direction))
+      .map(move => ({
+        move,
+        cell: nextCell(head, move),
+      }))
+      .filter(choice => !body.has(`${choice.cell.x},${choice.cell.y}`))
+      .sort((a, b) => wrappedDistance(a.cell, target) - wrappedDistance(b.cell, target));
+
+    const best = choices[Math.random() < 0.22 ? Math.min(1, choices.length - 1) : 0];
+    if (best) direction = best.move;
+
+    snake.unshift(nextCell(head, direction));
+    if (snake[0].x === target.x && snake[0].y === target.y) chooseTarget();
+    while (snake.length > snakeLength) snake.pop();
+  }
+
+  function drawSnake() {
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const bodyColor = isDark ? 'rgba(120, 255, 142,' : 'rgba(0, 198, 1,';
+    const headColor = isDark ? 'rgba(170, 255, 185, 0.45)' : 'rgba(0, 153, 0, 0.38)';
+    const glowColor = isDark ? 'rgba(120, 255, 142, 0.08)' : 'rgba(0, 198, 1, 0.07)';
+    const gap = Math.max(3, Math.floor(grid * 0.18));
+    const size = grid - gap;
+
+    ctx.fillStyle = glowColor;
+    ctx.fillRect(target.x * grid + grid * 0.35, target.y * grid, grid * 0.3, grid);
+    ctx.fillRect(target.x * grid, target.y * grid + grid * 0.35, grid, grid * 0.3);
+
+    snake.forEach((part, index) => {
+      const opacity = Math.max(0.12, 0.32 - index * 0.006);
+      ctx.fillStyle = index === 0 ? headColor : `${bodyColor} ${opacity})`;
+      ctx.fillRect(part.x * grid + gap / 2, part.y * grid + gap / 2, size, size);
+    });
+
+    const head = snake[0];
+    ctx.fillStyle = isDark ? 'rgba(15, 15, 15, 0.8)' : 'rgba(255, 255, 255, 0.86)';
+    ctx.fillRect(
+      head.x * grid + grid * 0.36 + direction.x * grid * 0.18,
+      head.y * grid + grid * 0.36 + direction.y * grid * 0.18,
+      grid * 0.28,
+      grid * 0.28
+    );
+  }
+
+  function animateSnake(timestamp) {
+    if (timestamp - lastStep > 92) {
+      moveSnake();
+      drawSnake();
+      lastStep = timestamp;
+    }
+    snakeFrame = requestAnimationFrame(animateSnake);
+  }
+
+  function startSnake() {
+    setupSnake();
+    cancelAnimationFrame(snakeFrame);
+    snakeFrame = requestAnimationFrame(animateSnake);
+  }
+
+  window.addEventListener('resize', startSnake);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) cancelAnimationFrame(snakeFrame);
+    else startSnake();
+  });
+
+  reduceMotion.addEventListener('change', event => {
+    if (event.matches) {
+      cancelAnimationFrame(snakeFrame);
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    } else {
+      startSnake();
+    }
+  });
+
+  startSnake();
+}
+
+
 // ── SIDEBAR HIGHLIGHT ON SCROLL ───────────────
 const allSections = document.querySelectorAll('.page-content > section[id], .page-content > .about-choice[id]');
 

@@ -10,6 +10,7 @@ El sitio presenta mi perfil profesional, proyectos, habilidades, certificaciones
 - Diseño responsive con sidebar, menú móvil y modo claro/oscuro.
 - Soporte bilingüe español/inglés.
 - Reproductor de música controlado por el usuario.
+- Serpiente ambiental translúcida que recorre la página sin bloquear la lectura.
 - Secciones de proyectos, habilidades, certificaciones y contacto.
 - Modal interactivo con el juego Monstermon.
 
@@ -64,6 +65,7 @@ http://localhost:5500
 - Sincronización del idioma real del documento al cambiar entre español e inglés.
 - Carga optimizada para imágenes fuera del primer vistazo.
 - Metadatos básicos para SEO.
+- Animación decorativa tipo snake con canvas y soporte para `prefers-reduced-motion`.
 - README más claro para reclutadores y colaboradores.
 
 ## Roadmap

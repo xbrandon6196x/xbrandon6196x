@@ -44,6 +44,23 @@ body {
 
 .green { color: var(--green); }
 
+/* ── AMBIENT SNAKE ───────────────────────── */
+.ambient-snake {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.58;
+  mix-blend-mode: multiply;
+}
+
+[data-theme="dark"] .ambient-snake {
+  opacity: 0.46;
+  mix-blend-mode: screen;
+}
+
 /* ── SIDEBAR ─────────────────────────────── */
 .sidebar {
   width: var(--sidebar-w);
@@ -842,6 +859,10 @@ footer span { color: var(--green); font-weight: 700; }
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .ambient-snake {
+    display: none;
   }
 }
 
