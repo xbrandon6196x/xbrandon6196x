@@ -481,6 +481,72 @@ input:focus-visible {
   transform: translateY(-2px);
   box-shadow: 0 8px 22px rgba(79,142,247,0.42);
 }
+.cv-preview {
+  padding: 24px;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background:
+    linear-gradient(135deg, var(--green-light), transparent 52%),
+    var(--card-bg);
+}
+.cv-preview-kicker {
+  display: inline-flex;
+  width: fit-content;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: var(--green-light);
+  color: var(--green-dark);
+  font-size: 0.78em;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 14px;
+}
+.cv-preview h3 {
+  color: var(--text);
+  font-size: 1.35em;
+  line-height: 1.18;
+  margin-bottom: 12px;
+}
+.cv-preview p {
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+.cv-preview ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.cv-preview li {
+  position: relative;
+  padding-left: 18px;
+  color: var(--text);
+  font-size: 0.92em;
+  line-height: 1.45;
+  font-weight: 700;
+}
+.cv-preview li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 4px var(--green-light);
+}
+.cv-preview .cv-preview-note {
+  margin: 0;
+  font-size: 0.86em;
+  font-weight: 800;
+  color: var(--green-dark);
+}
 .cv-frame {
   display: block;
   width: 100%;
@@ -1280,6 +1346,7 @@ footer span { color: var(--green); font-weight: 700; }
   .social-icons { justify-content: center; }
   .about-choice { padding: 50px 28px; }
   .about-panel { flex-direction: column !important; padding: 40px 28px; }
+  .cv-preview { min-height: 360px; padding: 22px; }
   .cv-frame { height: 420px; }
   .cv-viewer-header { align-items: flex-start; }
   .achievement-card {
