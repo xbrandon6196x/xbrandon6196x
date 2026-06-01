@@ -265,6 +265,12 @@ input:focus-visible {
   margin-bottom: 14px;
 }
 
+.hero-lead {
+  color: var(--text) !important;
+  font-weight: 700;
+  line-height: 1.62;
+}
+
 .hero-achievement {
   width: fit-content;
   display: inline-flex;
@@ -609,7 +615,8 @@ section h2 { font-size: 2em; font-weight: 900; margin-bottom: 10px; color: var(-
 
 /* ── PROFESSIONAL POSITIONING ─────────────── */
 #value,
-#specializations {
+#specializations,
+#pitch {
   background: var(--bg2) !important;
 }
 
@@ -762,6 +769,41 @@ section h2 { font-size: 2em; font-weight: 900; margin-bottom: 10px; color: var(-
   font-size: 1.8em;
   line-height: 1;
   margin-bottom: 14px;
+}
+
+.pitch-card {
+  max-width: 960px;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-left: 6px solid var(--green);
+  border-radius: 14px;
+  background: var(--card-bg);
+  box-shadow: 0 12px 34px rgba(0,0,0,0.06);
+}
+
+.pitch-card p {
+  position: relative;
+  padding-left: 28px;
+  color: var(--text);
+  font-size: 1.02em;
+  font-weight: 700;
+  line-height: 1.65;
+}
+
+.pitch-card p:not(:last-child) {
+  margin-bottom: 14px;
+}
+
+.pitch-card p::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.68em;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 5px var(--green-light);
 }
 
 /* ── SKILLS ──────────────────────────────── */

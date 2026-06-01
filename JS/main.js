@@ -277,18 +277,32 @@ music.volume  = 0.1;
 
 playBtn.addEventListener('click', togglePlay);
 
-function togglePlay() {
+function setMusicButton(playing) {
+  isPlaying = playing;
+  playBtn.textContent = playing ? '⏸' : '▶';
+  playBtn.setAttribute('aria-label', playing ? 'Pausar música' : 'Reproducir música');
+}
+
+async function togglePlay() {
   if (isPlaying) {
     music.pause();
-    playBtn.textContent = '▶';
-    playBtn.setAttribute('aria-label', 'Reproducir música');
+    setMusicButton(false);
   } else {
-    music.play().catch(() => {}); // handle browser autoplay policy
-    playBtn.textContent = '⏸';
-    playBtn.setAttribute('aria-label', 'Pausar música');
+    // Music starts only after the user explicitly presses the player button.
+    try {
+      await music.play();
+      setMusicButton(!music.paused);
+      setTimeout(() => {
+        if (music.paused) setMusicButton(false);
+      }, 500);
+    } catch {
+      setMusicButton(false);
+    }
   }
-  isPlaying = !isPlaying;
 }
+
+music.addEventListener('play', () => setMusicButton(true));
+music.addEventListener('pause', () => setMusicButton(false));
 
 // Update progress bar as song plays
 music.addEventListener('timeupdate', () => {
