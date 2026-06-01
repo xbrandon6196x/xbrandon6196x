@@ -258,6 +258,10 @@ input:focus-visible {
   color: var(--text);
 }
 
+.headline-separator {
+  white-space: nowrap;
+}
+
 .hero-text p {
   font-size: 1.05em;
   color: var(--muted);
@@ -1314,6 +1318,7 @@ footer span { color: var(--green); font-weight: 700; }
   }
 
   .hero { flex-direction: column; padding: 90px 28px 50px; text-align: center; }
+  .headline-separator { display: none; }
 
   .hero-image { display: flex; max-width: 220px; min-height: 220px; margin: 0 auto; }
 
