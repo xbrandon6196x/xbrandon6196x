@@ -629,6 +629,52 @@ if (snakeCanvas && !reduceMotion.matches) {
 }
 
 
+// ── STATS COUNTERS (NUEVO) ────────────────────
+// Anima los números de la stats bar al entrar en pantalla.
+// Los valores finales ya están en el HTML, así que sin JS (o con
+// prefers-reduced-motion) las métricas siguen siendo visibles.
+const statNumbers = document.querySelectorAll('.stat-number');
+
+if (statNumbers.length && 'IntersectionObserver' in window) {
+  const formatStat = (el, value) => {
+    const decimals = parseInt(el.dataset.decimals || '0', 10);
+    const formatted = value.toLocaleString('en-US', {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals,
+    });
+    el.textContent = (el.dataset.prefix || '') + formatted + (el.dataset.suffix || '');
+  };
+
+  const animateStat = el => {
+    const target = parseFloat(el.dataset.target);
+    if (Number.isNaN(target)) return;
+    if (reduceMotion.matches) {
+      formatStat(el, target);
+      return;
+    }
+    const duration = 1600;
+    const start = performance.now();
+    const step = now => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      formatStat(el, target * eased);
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+
+  const statsObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      animateStat(entry.target);
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.4 });
+
+  statNumbers.forEach(el => statsObserver.observe(el));
+}
+
+
 // ── SIDEBAR HIGHLIGHT ON SCROLL ───────────────
 const allSections = document.querySelectorAll('.page-content > section[id], .page-content > .about-choice[id]');
 

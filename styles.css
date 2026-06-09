@@ -275,6 +275,28 @@ input:focus-visible {
   line-height: 1.62;
 }
 
+/* NUEVO: métrica gancho del hero */
+.hero-metric {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+  padding: 8px 14px;
+  border: 1px solid rgba(0,198,1,0.22);
+  border-radius: 10px;
+  background: var(--green-light);
+  color: var(--green-dark);
+  font-size: 0.92em !important;
+  font-weight: 700;
+}
+
+.hero-metric strong {
+  font-size: 1.18em;
+  font-weight: 900;
+  color: var(--green-dark);
+}
+
 .hero-achievement {
   width: fit-content;
   display: inline-flex;
@@ -808,6 +830,222 @@ section h2 { font-size: 2em; font-weight: 900; margin-bottom: 10px; color: var(-
   border-radius: 50%;
   background: var(--green);
   box-shadow: 0 0 0 5px var(--green-light);
+}
+
+/* ── STATS BAR (NUEVO) ───────────────────── */
+#stats {
+  padding: 42px 60px;
+  background: var(--bg2) !important;
+}
+
+.stats-bar {
+  max-width: 1120px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 18px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px 18px;
+  text-align: center;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.05);
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s, background 0.3s;
+}
+
+.stat-item:hover {
+  transform: translateY(-4px);
+  border-color: var(--green);
+  box-shadow: 0 14px 34px rgba(0,198,1,0.12);
+}
+
+.stat-number {
+  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--green);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-label {
+  color: var(--muted);
+  font-size: 0.88em;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* ── GROWTH TIMELINE (NUEVO) ─────────────── */
+.timeline {
+  position: relative;
+  max-width: 980px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding-left: 34px;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, var(--green) 0%, rgba(0,198,1,0.15) 100%);
+}
+
+.timeline-item {
+  position: relative;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -30px;
+  top: 6px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 5px var(--green-light);
+}
+
+.timeline-item.current::before {
+  width: 17px;
+  height: 17px;
+  left: -32px;
+  box-shadow: 0 0 0 6px var(--green-light), 0 0 18px rgba(0,198,1,0.55);
+}
+
+.timeline-period {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-size: 0.82em;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.current-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--green);
+  color: #fff;
+  font-size: 0.92em;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  box-shadow: 0 4px 14px rgba(0,198,1,0.35);
+}
+
+.timeline-card {
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--card-bg);
+  box-shadow: 0 10px 32px rgba(0,0,0,0.06);
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s, background 0.3s;
+}
+
+.timeline-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--green);
+  box-shadow: 0 16px 38px rgba(0,198,1,0.12);
+}
+
+/* El rol actual lleva el mayor peso visual */
+.timeline-item.current .timeline-card {
+  padding: 30px 28px;
+  border: 2px solid var(--green);
+  background: linear-gradient(135deg, var(--card-bg) 0%, var(--green-light) 100%);
+  box-shadow: 0 18px 46px rgba(0,198,1,0.16);
+}
+
+.timeline-card h3 {
+  color: var(--text);
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+
+.timeline-item.current .timeline-card h3 {
+  font-size: clamp(1.25rem, 2.6vw, 1.8rem);
+}
+
+.timeline-card ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.timeline-card li {
+  position: relative;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: 0.92em;
+  line-height: 1.5;
+}
+
+.timeline-card li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 4px var(--green-light);
+}
+
+.timeline-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.metric-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  padding: 7px 13px;
+  border: 1px solid rgba(0,198,1,0.22);
+  border-radius: 999px;
+  background: var(--green-light);
+  color: var(--green-dark);
+  font-size: 0.8em;
+  font-weight: 700;
+}
+
+.metric-chip strong {
+  font-size: 1.25em;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+
+[data-theme="dark"] .metric-chip,
+[data-theme="dark"] .hero-metric {
+  color: #7dff8e;
+}
+
+[data-theme="dark"] .metric-chip strong,
+[data-theme="dark"] .hero-metric strong {
+  color: #9bffaa;
 }
 
 /* ── SKILLS ──────────────────────────────── */
@@ -1350,6 +1588,16 @@ footer span { color: var(--green); font-weight: 700; }
   .experience-badge {
     align-self: flex-start;
   }
+  #stats { padding: 32px 28px; }
+  .stats-bar { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+  .stat-item { padding: 18px 12px; }
+  .hero-metric { margin-left: auto; margin-right: auto; justify-content: center; }
+  .timeline { padding-left: 26px; gap: 24px; }
+  .timeline::before { left: 6px; }
+  .timeline-item::before { left: -24px; width: 11px; height: 11px; }
+  .timeline-item.current::before { left: -26px; width: 15px; height: 15px; }
+  .timeline-card { padding: 18px; }
+  .timeline-item.current .timeline-card { padding: 22px 18px; }
   section { padding: 60px 28px; }
   .contact-wrapper { flex-direction: column; }
   .music-player { left: 0; padding: 8px 14px; gap: 10px; }
