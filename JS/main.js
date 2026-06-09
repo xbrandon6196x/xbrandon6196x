@@ -675,6 +675,11 @@ if (statNumbers.length && 'IntersectionObserver' in window) {
 }
 
 
+// ── FOOTER YEAR (NUEVO) ───────────────────────
+const footerYear = document.getElementById('footerYear');
+if (footerYear) footerYear.textContent = new Date().getFullYear();
+
+
 // ── SIDEBAR HIGHLIGHT ON SCROLL ───────────────
 const allSections = document.querySelectorAll('.page-content > section[id], .page-content > .about-choice[id]');
 

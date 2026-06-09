@@ -80,4 +80,4 @@ http://localhost:5500
 
 - GitHub: [xbrandon6196x](https://github.com/xbrandon6196x)
 - LinkedIn: [Brandon Keymolent](https://mx.linkedin.com/in/brandonkeymolent)
-- Email: contacto_brandonkeymolent@gmail.com
+- Email: contactobrandonkey@gmail.com
