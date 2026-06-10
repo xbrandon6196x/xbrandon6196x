@@ -1,6 +1,6 @@
 # Portafolio Web | Brand Keymolent
 
-Portafolio personal de Brand Keymolent Olvera, estudiante de Ingeniería de Software y Redes con experiencia en telecomunicaciones, soporte técnico, análisis financiero, atención al cliente y desarrollo Front-End.
+Portafolio personal de Brandon Keymolent Olvera, Ingeniero de Software y Redes y Gerente de Operaciones y Transformación Digital en Figou Telecom, con 7+ años de experiencia en operaciones de cliente y telecom, soporte técnico avanzado, automatización con IA y producto digital.
 
 El sitio presenta mi perfil profesional, proyectos, habilidades, certificaciones, CV descargable, enlaces de contacto y un juego integrado llamado Monstermon.
 
@@ -30,7 +30,7 @@ El sitio presenta mi perfil profesional, proyectos, habilidades, certificaciones
 ├── JS/
 │   └── main.js
 ├── certificados/
-├── CV_Brandon_Keymolent_FINAL.pdf
+├── CV_Brandon_Keymolent.pdf
 └── assets de imágenes, iconos y audio
 ```
 
