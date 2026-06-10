@@ -691,7 +691,7 @@ section h2 { font-size: 2em; font-weight: 900; margin-bottom: 10px; color: var(-
 /* ── PROFESSIONAL POSITIONING ─────────────── */
 #value,
 #specializations,
-#foundation,
+#education, /* MEJORADO: la nueva sección Educación hereda el fondo alterno de Base profesional */
 #impact,
 #opportunities,
 #pitch {
@@ -1951,4 +1951,81 @@ footer span { color: var(--green); font-weight: 700; }
     padding: 8px;
     font-size: 0.66em;
   }
+}
+
+/* ── V2 TRANSFORMACIÓN DIGITAL ───────────────
+   Apoyos visuales del reposicionamiento: nota de
+   ascenso en el timeline, caso de estudio en
+   proyectos, sección Laboratorio discreta y línea
+   de "+25 certificaciones". */
+
+/* Nota de ascenso interno bajo el título del rol actual */
+.timeline-note {
+  margin: -6px 0 14px;
+  color: var(--green-dark);
+  font-size: 0.88em;
+  font-weight: 700;
+  font-style: italic;
+}
+
+[data-theme="dark"] .timeline-note {
+  color: #7dff8e;
+}
+
+/* Caso de estudio: bloques Problema → Mi rol → Resultado */
+.case-study .case-block h4 {
+  margin: 14px 0 4px;
+  color: var(--green-dark);
+  font-size: 0.78em;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+[data-theme="dark"] .case-study .case-block h4 {
+  color: #7dff8e;
+}
+
+/* Laboratorio y aprendizaje continuo: visualmente subordinada */
+#lab {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+#lab h2 {
+  font-size: 1.5em;
+}
+
+#lab .section-subtitle {
+  font-size: 0.95em;
+  margin-bottom: 28px;
+}
+
+.lab-grid .project-card {
+  box-shadow: 0 3px 14px rgba(0,0,0,0.05);
+}
+
+.lab-grid .project-card-body {
+  padding: 18px;
+}
+
+.lab-grid .project-card-body p {
+  font-size: 0.85em;
+}
+
+/* Línea "+25 certificaciones adicionales" */
+.certifications-platzi {
+  margin-top: 22px;
+  color: var(--muted);
+  font-size: 0.95em;
+  font-weight: 600;
+}
+
+.certifications-platzi a {
+  color: var(--green-dark);
+  font-weight: 800;
+}
+
+[data-theme="dark"] .certifications-platzi a {
+  color: #7dff8e;
 }
