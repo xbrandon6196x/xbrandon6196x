@@ -651,6 +651,8 @@ section h2 { font-size: 2em; font-weight: 900; margin-bottom: 10px; color: var(-
 /* ── PROFESSIONAL POSITIONING ─────────────── */
 #value,
 #specializations,
+#foundation,
+#opportunities,
 #pitch {
   background: var(--bg2) !important;
 }
@@ -660,7 +662,8 @@ section h2 { font-size: 2em; font-weight: 900; margin-bottom: 10px; color: var(-
 }
 
 .value-grid,
-.specialization-grid {
+.specialization-grid,
+.foundation-grid {
   max-width: 1120px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -669,6 +672,7 @@ section h2 { font-size: 2em; font-weight: 900; margin-bottom: 10px; color: var(-
 
 .value-card,
 .specialty-card,
+.foundation-card,
 .skill-category {
   background: var(--card-bg);
   border: 1px solid var(--border);
@@ -680,6 +684,7 @@ section h2 { font-size: 2em; font-weight: 900; margin-bottom: 10px; color: var(-
 
 .value-card:hover,
 .specialty-card:hover,
+.foundation-card:hover,
 .skill-category:hover {
   transform: translateY(-4px);
   border-color: var(--green);
@@ -702,6 +707,7 @@ section h2 { font-size: 2em; font-weight: 900; margin-bottom: 10px; color: var(-
 
 .value-card h3,
 .specialty-card h3,
+.foundation-card h3,
 .skill-category h3 {
   color: var(--text);
   font-size: 1.02em;
@@ -709,10 +715,94 @@ section h2 { font-size: 2em; font-weight: 900; margin-bottom: 10px; color: var(-
 }
 
 .value-card p,
-.specialty-card p {
+.specialty-card p,
+.foundation-card p {
   color: var(--muted);
   line-height: 1.65;
   font-size: 0.94em;
+}
+
+.evolution-strip {
+  max-width: 1120px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.evolution-strip span {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border: 1px solid rgba(0,198,1,0.22);
+  border-radius: 999px;
+  background: var(--card-bg);
+  color: var(--green-dark);
+  font-size: 0.82em;
+  font-weight: 900;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+}
+
+.evolution-strip span:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  right: -12px;
+  color: var(--green);
+  font-weight: 900;
+}
+
+.foundation-kicker {
+  display: inline-flex;
+  margin-bottom: 12px;
+  color: var(--green-dark);
+  font-size: 0.76em;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.opportunities-card {
+  max-width: 1120px;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--card-bg);
+  box-shadow: 0 12px 34px rgba(0,0,0,0.06);
+}
+
+.opportunities-card p {
+  max-width: 860px;
+  color: var(--text);
+  font-size: 1em;
+  font-weight: 700;
+  line-height: 1.65;
+}
+
+.opportunity-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.opportunity-tags span {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: var(--green-light);
+  color: var(--green-dark);
+  font-size: 0.82em;
+  font-weight: 900;
+}
+
+.opportunities-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
 }
 
 .experience-card {
@@ -1607,6 +1697,10 @@ footer span { color: var(--green); font-weight: 700; }
   .timeline-item.current::before { left: -26px; width: 15px; height: 15px; }
   .timeline-card { padding: 18px; }
   .timeline-item.current .timeline-card { padding: 22px 18px; }
+  .evolution-strip { justify-content: center; }
+  .evolution-strip span:not(:last-child)::after { display: none; }
+  .opportunities-card { padding: 22px; }
+  .opportunities-actions a { flex: 1 1 100%; justify-content: center; }
   section { padding: 60px 28px; }
   .contact-wrapper { flex-direction: column; }
   .music-player { left: 0; padding: 8px 14px; gap: 10px; }

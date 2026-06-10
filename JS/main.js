@@ -238,7 +238,7 @@ function applyLang(lang) {
 
 
 // ── ABOUT PANELS ──────────────────────────────
-// "Personalmente" is shown by default on load
+// "Laboralmente" is shown by default so the portfolio leads with professional context.
 function showPanel(type, e) {
   ['personal', 'work', 'both'].forEach(id => {
     document.getElementById('panel-' + id).classList.remove('visible');
