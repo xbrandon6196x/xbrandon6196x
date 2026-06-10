@@ -652,6 +652,7 @@ section h2 { font-size: 2em; font-weight: 900; margin-bottom: 10px; color: var(-
 #value,
 #specializations,
 #foundation,
+#impact,
 #opportunities,
 #pitch {
   background: var(--bg2) !important;
@@ -662,6 +663,7 @@ section h2 { font-size: 2em; font-weight: 900; margin-bottom: 10px; color: var(-
 }
 
 .value-grid,
+.impact-grid,
 .specialization-grid,
 .foundation-grid {
   max-width: 1120px;
@@ -671,6 +673,7 @@ section h2 { font-size: 2em; font-weight: 900; margin-bottom: 10px; color: var(-
 }
 
 .value-card,
+.impact-card,
 .specialty-card,
 .foundation-card,
 .skill-category {
@@ -683,6 +686,7 @@ section h2 { font-size: 2em; font-weight: 900; margin-bottom: 10px; color: var(-
 }
 
 .value-card:hover,
+.impact-card:hover,
 .specialty-card:hover,
 .foundation-card:hover,
 .skill-category:hover {
@@ -706,6 +710,7 @@ section h2 { font-size: 2em; font-weight: 900; margin-bottom: 10px; color: var(-
 }
 
 .value-card h3,
+.impact-card h3,
 .specialty-card h3,
 .foundation-card h3,
 .skill-category h3 {
@@ -715,11 +720,59 @@ section h2 { font-size: 2em; font-weight: 900; margin-bottom: 10px; color: var(-
 }
 
 .value-card p,
+.impact-card p,
 .specialty-card p,
 .foundation-card p {
   color: var(--muted);
   line-height: 1.65;
   font-size: 0.94em;
+}
+
+.hero-skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: 560px;
+  margin: 14px 0 4px;
+}
+
+.hero-skill-tags span {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 11px;
+  border: 1px solid rgba(0,198,1,0.24);
+  border-radius: 999px;
+  background: rgba(0,198,1,0.08);
+  color: var(--green-dark);
+  font-size: 0.76em;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+}
+
+.impact-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.impact-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 5px;
+  background: linear-gradient(180deg, var(--green), rgba(0,198,1,0.18));
+}
+
+.impact-kicker {
+  display: inline-flex;
+  margin-bottom: 14px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--green-light);
+  color: var(--green-dark);
+  font-size: 0.78em;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .evolution-strip {
@@ -1195,6 +1248,65 @@ section h2 { font-size: 2em; font-weight: 900; margin-bottom: 10px; color: var(-
 /* ── PROJECTS ────────────────────────────── */
 #certifications { background: var(--bg) !important; }
 
+.cert-featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 16px;
+  max-width: 1120px;
+  margin-bottom: 24px;
+}
+
+.cert-featured-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 150px;
+  padding: 20px;
+  border: 1px solid rgba(0,198,1,0.24);
+  border-radius: 14px;
+  background: var(--card-bg);
+  text-decoration: none;
+  box-shadow: 0 8px 26px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.cert-featured-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--green);
+  box-shadow: 0 14px 34px rgba(0,198,1,0.12);
+}
+
+.cert-featured-card span {
+  font-size: 1.9em;
+}
+
+.cert-featured-card strong {
+  color: var(--text);
+  font-size: 0.98em;
+  line-height: 1.25;
+}
+
+.cert-featured-card small {
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.certifications-more {
+  max-width: 1120px;
+}
+
+.certifications-more summary {
+  display: inline-flex;
+  margin-bottom: 18px;
+  padding: 10px 16px;
+  border: 1px solid rgba(0,198,1,0.24);
+  border-radius: 999px;
+  background: var(--green-light);
+  color: var(--green-dark);
+  font-weight: 900;
+  cursor: pointer;
+}
+
 .certifications-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -1267,6 +1379,22 @@ section h2 { font-size: 2em; font-weight: 900; margin-bottom: 10px; color: var(-
   gap: 24px;
 }
 
+.project-group-heading {
+  grid-column: 1 / -1;
+}
+
+.project-group-heading span {
+  display: inline-flex;
+  padding: 8px 13px;
+  border-radius: 999px;
+  background: var(--green-light);
+  color: var(--green-dark);
+  font-size: 0.82em;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .project-card {
   background: var(--card-bg);
   border-radius: 16px;
@@ -1275,6 +1403,16 @@ section h2 { font-size: 2em; font-weight: 900; margin-bottom: 10px; color: var(-
   transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
 }
 .project-card:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(0,0,0,0.12); }
+
+.project-card-featured {
+  grid-column: 1 / -1;
+  border: 2px solid rgba(0,198,1,0.28);
+  box-shadow: 0 16px 42px rgba(0,198,1,0.12);
+}
+
+.project-card-featured .project-card-body {
+  min-height: auto;
+}
 
 .project-card-header {
   height: 6px;
