@@ -1,2 +1,19 @@
+# SO
 .DS_Store
-.claude/
+Thumbs.db
+Desktop.ini
+
+# Secretos y entorno — NUNCA al repo (es público)
+.env
+.env.*
+*.pem
+*.key
+
+# Config personal de Claude Code
+.claude/settings.local.json
+
+# Dependencias temporales (npx no las crea, por si acaso)
+node_modules/
+
+# Respaldos locales de conversaciones/copias del repo
+2026-05-28/
