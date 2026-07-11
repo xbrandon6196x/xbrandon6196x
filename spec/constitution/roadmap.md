@@ -5,7 +5,7 @@ trabaja con `/nueva-feature` y vive en `spec/features/NNN-*`.
 
 | # | Feature | Descripción | Riesgo | Estado |
 |---|---------|-------------|--------|--------|
-| 001 | Saneamiento HTML | Dejar `html-validate` en verde: los 28 errores heredados (botones sin `type`, estilos inline → CSS, `&` sin escapar, `src=""` en sprites del juego, `<p>` dentro de `<label>`). Habilita el bucle autónomo: a partir de aquí, checks en verde = requisito de commit. | Bajo | Pendiente |
+| 001 | Saneamiento HTML | Dejar `html-validate` en verde: los errores heredados (21 tras el rework remoto de 2026-07: estilos inline → CSS, `&` sin escapar, `src=""` en sprites del juego, `<p>` dentro de `<label>`, `aria-label`/`aria-hidden` mal usados). Habilita el bucle autónomo: a partir de aquí, checks en verde = requisito de commit. | Bajo | Hecha |
 | 002 | SEO + accesibilidad | Meta description, Open Graph/Twitter cards, favicon declarado, `alt` descriptivos en todas las imágenes, aria-labels en controles (hamburger, player), contraste verificado. | Bajo | Pendiente |
 | 003 | Rendimiento | Optimizar imágenes pesadas (fotos_collage.png, PNGs de iconos → tamaños correctos/WebP), `loading="lazy"` bajo el fold, `font-display`. Sin bundlers: se optimizan los assets mismos. | Medio | Pendiente |
 | 004 | Más proyectos/secciones | Nuevos proyectos en la galería (usar `/nuevo-proyecto`) y/o sección de experiencia laboral. Contenido lo aporta Brandon. | Medio | Pendiente |

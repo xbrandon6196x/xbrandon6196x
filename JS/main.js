@@ -6,7 +6,6 @@ let lastFocusedBeforeModal = null;
 function abrirJuego() {
   lastFocusedBeforeModal = document.activeElement;
   modalJuego.classList.add('open');
-  modalJuego.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
   resetearJuego();
   iniciarMonstermon();
@@ -16,7 +15,6 @@ function abrirJuego() {
 function cerrarJuego(e, forzar = false) {
   if (!forzar && e && e.target !== modalJuego) return;
   modalJuego.classList.remove('open');
-  modalJuego.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
   if (lastFocusedBeforeModal) lastFocusedBeforeModal.focus();
 }

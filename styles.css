@@ -1459,6 +1459,10 @@ section h2 { font-size: 2em; font-weight: 900; margin-bottom: 10px; color: var(-
   background: linear-gradient(90deg, var(--green), var(--green-dark));
 }
 
+/* Colores de marca de cada proyecto (mismos en ambos temas) */
+.project-card-header.header-abarrotes { background: linear-gradient(90deg, #00c601, #1f8a3b); }
+.project-card-header.header-batatabit { background: linear-gradient(90deg, #f7931a, #e8a020); }
+
 .project-card-body {
   padding: 24px;
   display: flex;
@@ -1555,6 +1559,7 @@ section h2 { font-size: 2em; font-weight: 900; margin-bottom: 10px; color: var(-
 }
 .contact-link:hover { background: var(--green-light); transform: translateX(4px); }
 .contact-link img { width: 28px; height: 28px; flex-shrink: 0; }
+.contact-icon { font-size: 1.5em; }
 
 /* ── MUSIC PLAYER ────────────────────────── */
 .music-player {
@@ -1597,6 +1602,7 @@ section h2 { font-size: 2em; font-weight: 900; margin-bottom: 10px; color: var(-
 .music-progress { flex: 1; min-width: 100px; accent-color: var(--green); cursor: pointer; height: 4px; }
 .music-volume { width: 80px; accent-color: var(--green); cursor: pointer; height: 4px; }
 .music-time { font-size: 0.78em; color: var(--muted); min-width: 36px; }
+.music-icon { font-size: 0.8em; }
 
 /* ── MODAL JUEGO ─────────────────────────── */
 .modal-overlay {
@@ -1611,7 +1617,6 @@ section h2 { font-size: 2em; font-weight: 900; margin-bottom: 10px; color: var(-
   backdrop-filter: blur(4px);
 }
 .modal-overlay.open { display: flex; }
-.modal-overlay[aria-hidden="true"] { display: none; }
 
 .modal-box {
   position: relative;
@@ -1684,7 +1689,7 @@ input[type="radio"][name="mm-mascota"] { display: none; }
   padding: 16px 12px; width: 120px; cursor: pointer;
   transition: all .3s; position: relative;
 }
-.mm-tarjeta p { font-weight: 700; font-size: 0.9rem; margin-bottom: 8px; color: #fff; }
+.mm-tarjeta-nombre { display: block; font-weight: 700; font-size: 0.9rem; margin-bottom: 8px; color: #fff; }
 .mm-tarjeta img { width: 60px; height: 60px; object-fit: contain; transition: transform .3s; }
 .mm-tarjeta:hover { transform: translateY(-6px); border-color: #4f8ef7; box-shadow: 0 8px 24px rgba(79,142,247,0.4); }
 .mm-tarjeta:hover img { transform: scale(1.15) rotate(-5deg); }
@@ -1728,6 +1733,7 @@ input[type="radio"][name="mm-mascota"]:checked + .mm-tarjeta::after {
 .mm-corazones { display: flex; gap: 4px; font-size: 1.2rem; }
 .mm-corazon.perdido { filter: grayscale(1); opacity: 0.3; }
 
+.mm-vs-col { display: flex; flex-direction: column; align-items: center; gap: 8px; }
 .mm-vs {
   font-family: 'Bangers', cursive; font-size: 2rem;
   background: linear-gradient(135deg, #e74c3c, #f39c12);
@@ -1783,6 +1789,7 @@ input[type="radio"][name="mm-mascota"]:checked + .mm-tarjeta::after {
 /* ── FOOTER ──────────────────────────────── */
 footer { background: #111; color: #aaa; text-align: center; padding: 30px 20px; font-size: 0.85em; }
 footer span { color: var(--green); font-weight: 700; }
+.footer-sub { margin-top: 6px; }
 
 /* ── ANIMATIONS ──────────────────────────── */
 @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
