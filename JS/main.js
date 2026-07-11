@@ -151,6 +151,20 @@ function mmAtacar(ataque) {
   }
 }
 
+// ── ARIA-LABELS DINÁMICOS BILINGÜES ──────────
+// Los estáticos usan data-aria-es/data-aria-en (los procesa applyLang).
+const ARIA = {
+  menuOpen:   { es: 'Cerrar menú',        en: 'Close menu' },
+  menuClosed: { es: 'Abrir menú',         en: 'Open menu' },
+  play:       { es: 'Reproducir música',  en: 'Play music' },
+  pause:      { es: 'Pausar música',      en: 'Pause music' }
+};
+
+function ariaText(key) {
+  const lang = document.documentElement.getAttribute('data-lang') || 'es';
+  return ARIA[key][lang];
+}
+
 // ── HAMBURGER MENU ────────────────────────────
 const hamburger = document.getElementById('hamburger');
 const sidebar   = document.getElementById('sidebar');
@@ -158,7 +172,7 @@ const sidebar   = document.getElementById('sidebar');
 hamburger.addEventListener('click', () => {
   const isOpen = sidebar.classList.toggle('active');
   hamburger.setAttribute('aria-expanded', String(isOpen));
-  hamburger.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+  hamburger.setAttribute('aria-label', ariaText(isOpen ? 'menuOpen' : 'menuClosed'));
 });
 
 sidebar.querySelectorAll('a, button').forEach(item => {
@@ -166,7 +180,7 @@ sidebar.querySelectorAll('a, button').forEach(item => {
     if (window.innerWidth <= 900) {
       sidebar.classList.remove('active');
       hamburger.setAttribute('aria-expanded', 'false');
-      hamburger.setAttribute('aria-label', 'Abrir menú');
+      hamburger.setAttribute('aria-label', ariaText('menuClosed'));
     }
   });
 });
@@ -230,6 +244,18 @@ function applyLang(lang) {
     if (text !== null) el.textContent = text;
   });
 
+  // aria-labels estáticos bilingües (mismo patrón que data-es/data-en)
+  document.querySelectorAll('[data-aria-' + lang + ']').forEach(el => {
+    el.setAttribute('aria-label', el.getAttribute('data-aria-' + lang));
+  });
+
+  // aria-labels dinámicos: conservan su estado en el idioma nuevo
+  hamburger.setAttribute('aria-label',
+    ariaText(sidebar.classList.contains('active') ? 'menuOpen' : 'menuClosed'));
+  const mBtn = document.getElementById('musicPlayBtn');
+  const mAudio = document.getElementById('bg-music');
+  if (mBtn && mAudio) mBtn.setAttribute('aria-label', ariaText(mAudio.paused ? 'play' : 'pause'));
+
   // Re-sync theme label
   updateThemeUI(html.getAttribute('data-theme'));
 }
@@ -244,7 +270,7 @@ function showPanel(type, e) {
 
   document.querySelectorAll('.choice-btn').forEach(b => {
     b.classList.remove('active');
-    b.setAttribute('aria-selected', 'false');
+    b.setAttribute('aria-pressed', 'false');
   });
 
   document.getElementById('panel-' + type).classList.add('visible');
@@ -253,7 +279,7 @@ function showPanel(type, e) {
   const btn = document.getElementById('btn-' + type);
   if (btn) {
     btn.classList.add('active');
-    btn.setAttribute('aria-selected', 'true');
+    btn.setAttribute('aria-pressed', 'true');
   }
 
   setTimeout(() => {
@@ -278,7 +304,7 @@ playBtn.addEventListener('click', togglePlay);
 function setMusicButton(playing) {
   isPlaying = playing;
   playBtn.textContent = playing ? '⏸' : '▶';
-  playBtn.setAttribute('aria-label', playing ? 'Pausar música' : 'Reproducir música');
+  playBtn.setAttribute('aria-label', ariaText(playing ? 'pause' : 'play'));
 }
 
 async function togglePlay() {
